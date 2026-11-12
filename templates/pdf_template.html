@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IT Procurement Requisition - {{ req.ticket_number }}</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.5;
+      font-size: 11pt;
+      background: #fff;
+    }
+    .requisition-card {
+      border: 2px solid #1e3a8a;
+      border-radius: 8px;
+      padding: 18px 24px;
+    }
+    .header {
+      display: table;
+      width: 100%;
+      border-bottom: 2.5px solid #1e3a8a;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+    .header-left {
+      display: table-cell;
+      vertical-align: bottom;
+    }
+    .header-left h1 {
+      font-size: 16pt;
+      color: #1e3a8a;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-left p {
+      font-size: 8.5pt;
+      color: #64748b;
+      margin-top: 3px;
+    }
+    .header-right {
+      display: table-cell;
+      vertical-align: bottom;
+      text-align: right;
+    }
+    .ticket-badge {
+      display: inline-block;
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-align: right;
+    }
+    .ticket-badge .lbl {
+      font-size: 7pt;
+      font-weight: 700;
+      color: #166534;
+      text-transform: uppercase;
+    }
+    .ticket-badge .val {
+      font-size: 13pt;
+      font-weight: 800;
+      color: #15803d;
+      font-family: monospace;
+    }
+    .section-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1e3a8a;
+      background: #f1f5f9;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin: 12px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .grid {
+      display: table;
+      width: 100%;
+      margin-bottom: 4px;
+    }
+    .col-half {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+      padding-right: 12px;
+    }
+    .data-row {
+      font-size: 9pt;
+      padding: 3px 0;
+      border-bottom: 1px dotted #e2e8f0;
+    }
+    .label {
+      font-weight: 700;
+      color: #475569;
+      width: 130px;
+      display: inline-block;
+    }
+    .value {
+      color: #0f172a;
+    }
+    .box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-top: 6px;
+      font-size: 9pt;
+    }
+    .box-title {
+      font-weight: 700;
+      color: #1e3a8a;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .signatures {
+      display: table;
+      width: 100%;
+      margin-top: 14px;
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 10px;
+    }
+    .sig-col {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+      padding: 0 8px;
+    }
+    .sig-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 8.5pt;
+    }
+  </style>
+</head>
+<body>
+
+<div class="requisition-card">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>IT Infrastructure Procurement Requisition</h1>
+      <p>Official Requisition Copy &middot; Generated on {{ generation_date }}</p>
+    </div>
+    <div class="header-right">
+      <div class="ticket-badge">
+        <span class="lbl">Ticket Number</span><br>
+        <span class="val">{{ req.ticket_number }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Requester Information -->
+  <div class="section-title">1. Requester &amp; Organizational Details</div>
+  <div class="grid">
+    <div class="col-half">
+      <div class="data-row"><span class="label">Requester Name:</span> <span class="value">{{ req.requester_name }}</span></div>
+      <div class="data-row"><span class="label">Official Email:</span> <span class="value">{{ req.official_email }}</span></div>
+      <div class="data-row"><span class="label">Department:</span> <span class="value">{{ req.department }}{% if req.other_department %} ({{ req.other_department }}){% endif %}</span></div>
+    </div>
+    <div class="col-half">
+      <div class="data-row"><span class="label">Date of Request:</span> <span class="value">{{ req.date_of_request }}</span></div>
+      <div class="data-row"><span class="label">Reporting HOD:</span> <span class="value">{{ req.hod_manager }}</span></div>
+      <div class="data-row"><span class="label">Delivery Location:</span> <span class="value">{{ req.delivery_address }}</span></div>
+    </div>
+  </div>
+
+  <!-- Section 2: Procurement Requirements -->
+  <div class="section-title">2. Procurement Requirements</div>
+  <div class="grid">
+    <div class="col-half">
+      <div class="data-row"><span class="label">Request Type:</span> <span class="value">{{ req.request_type }}</span></div>
+      <div class="data-row"><span class="label">Item Category:</span> <span class="value">{{ req.item_category }}</span></div>
+    </div>
+    <div class="col-half">
+      <div class="data-row"><span class="label">Quantity:</span> <span class="value">{{ req.quantity }}</span></div>
+      <div class="data-row"><span class="label">Date Required:</span> <span class="value">{{ req.date_required }}</span></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <span class="box-title">Primary Requested Item &amp; Purpose:</span>
+    <strong>{{ req.item_requested }}</strong> (Quantity: {{ req.quantity }})<br>
+    <span style="color: #475569;">Purpose / Business Workload:</span> {{ req.purpose }}
+  </div>
+
+  {% if req.laptop_specs %}
+  <div class="box" style="margin-top: 8px;">
+    <span class="box-title">Department Standard Hardware Specification:</span>
+    <span style="color: #0f172a;">{{ req.laptop_specs }}</span><br>
+    <span style="color: #64748b; font-size: 8pt; margin-top: 4px; display: block;">Standard Accessories: Carrying bag, Mouse, Headphones</span>
+  </div>
+  {% endif %}
+
+  <!-- Section 3: Digital Declarations & Audit Trail -->
+  <div class="signatures">
+    <div class="sig-col" style="padding-left: 0;">
+      <div class="sig-box">
+        <strong style="color: #1e3a8a; display: block; margin-bottom: 4px;">Requester Confirmation:</strong>
+        <p>I confirm that the information provided is accurate and required for official duties.</p>
+        <p style="margin-top: 6px;">Digitally Signed By: <strong>{{ req.requester_name }}</strong></p>
+        <p style="color: #64748b;">Date: {{ req.date_of_request }}</p>
+      </div>
+    </div>
+    <div class="sig-col" style="padding-right: 0;">
+      <div class="sig-box">
+        <strong style="color: #1e3a8a; display: block; margin-bottom: 4px;">Workflow Verification:</strong>
+        <p>HOD Status: <strong>Pending Review ({{ req.hod_manager }})</strong></p>
+        <p>IT Infrastructure Verification: <strong>Initiated</strong></p>
+        <p style="margin-top: 6px;">Status: <strong>{{ req.status }}</strong> &middot; Database ID: #{{ req.id }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

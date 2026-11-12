@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Submissions Log Panel - Procurement Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      padding: 1.25rem;
+    }
+    .panel-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .brand-title h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .brand-title p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.15rem;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .user-pill {
+      font-size: 0.82rem;
+      background: #eff6ff;
+      color: #1e40af;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid #dbeafe;
+    }
+    .btn {
+      padding: 0.45rem 0.85rem;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .btn-outline {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+    .btn-outline:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .btn-danger {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #dc2626;
+    }
+    .btn-danger:hover {
+      background: #fee2e2;
+    }
+    .btn-danger-solid {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: white;
+    }
+    .btn-danger-solid:hover {
+      background: #b91c1c;
+    }
+    .btn-delete {
+      padding: 0.3rem 0.55rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      color: #dc2626;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-delete:hover {
+      background: #dc2626;
+      color: white;
+    }
+    .btn-detail {
+      padding: 0.3rem 0.65rem;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      color: #1d4ed8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-detail:hover {
+      background: #dbeafe;
+    }
+    .alert-banner {
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .alert-success {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 768px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .kpi-card {
+      background: #ffffff;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .kpi-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+    }
+    .kpi-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 0.25rem;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      background: white;
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: #1a56db;
+      box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+    }
+    .filter-select {
+      padding: 0.65rem 0.9rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      background: white;
+      color: #334155;
+    }
+
+    /* ── Organized Screen-Fit Table (No Horizontal Scroll) ── */
+    .table-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      width: 100%;
+      overflow: hidden; /* No horizontal scrollbar needed */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.86rem;
+      table-layout: fixed; /* Enforces clean proportioned columns */
+    }
+    thead th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+    tbody td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      vertical-align: top;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+    .col-ticket { width: 20%; }
+    .col-requester { width: 26%; }
+    .col-item { width: 33%; }
+    .col-status { width: 10%; }
+    .col-actions { width: 11%; }
+
+    .ticket-badge {
+      font-family: monospace;
+      font-weight: 700;
+      color: #1a56db;
+      background: #eff6ff;
+      padding: 0.2rem 0.45rem;
+      border-radius: 5px;
+      border: 1px solid #dbeafe;
+      display: inline-block;
+      font-size: 0.82rem;
+    }
+    .date-meta {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+      line-height: 1.35;
+    }
+    .date-need {
+      color: #b45309;
+      font-weight: 600;
+    }
+    .user-name {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 0.9rem;
+    }
+    .user-email {
+      font-size: 0.78rem;
+      color: #64748b;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .dept-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      background: #f1f5f9;
+      color: #334155;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+    }
+    .mgr-info {
+      font-size: 0.76rem;
+      color: #64748b;
+      margin-top: 0.2rem;
+    }
+    .item-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .qty-tag {
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+    }
+    .item-category {
+      font-size: 0.78rem;
+      color: #475569;
+      margin-top: 0.2rem;
+    }
+    .item-purpose {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.35;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #dbeafe;
+      color: #1e40af;
+      letter-spacing: 0.03em;
+    }
+    .action-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      align-items: flex-start;
+    }
+    .empty-state {
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      color: #64748b;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      background: white;
+      border-radius: 12px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .modal-header h3 {
+      font-size: 1.15rem;
+      color: #0f172a;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #64748b;
+    }
+    .modal-row {
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+    }
+    .modal-row strong {
+      display: inline-block;
+      width: 140px;
+      color: #475569;
+    }
+    .modal-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1rem;
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .modal-footer-right {
+      display: flex;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="panel-container">
+
+  <!-- Top Navigation Header -->
+  <div class="top-nav">
+    <div class="brand-title">
+      <h1>📋 IT Infrastructure Submissions Log</h1>
+      <p>Organized management portal for viewing and managing equipment requisitions</p>
+    </div>
+    <div class="nav-actions">
+      <span class="user-pill">👤 {{ user }}</span>
+      <a href="/" class="btn btn-outline" target="_blank">+ Public Form</a>
+      {% if requests %}
+      <form action="/portal/clear-all" method="POST" style="display: inline;" onsubmit="return confirm('⚠️ WARNING: Are you sure you want to permanently clear ALL submitted requests and their archived PDF files from the database? This action cannot be undone.');">
+        <button type="submit" class="btn btn-danger-solid">🧹 Clear All Submissions</button>
+      </form>
+      {% endif %}
+      <a href="/logout" class="btn btn-danger">🚪 Logout</a>
+    </div>
+  </div>
+
+  <!-- Action Status Alerts -->
+  {% if msg == 'deleted' %}
+  <div class="alert-banner alert-success">
+    <span>✓</span> The requisition record and its archived PDF file have been deleted.
+  </div>
+  {% elif msg == 'cleared' %}
+  <div class="alert-banner alert-success">
+    <span>✓</span> All submitted procurement requests and associated archived PDF files have been cleared.
+  </div>
+  {% endif %}
+
+  <!-- KPI Summary Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-title">Total Submissions</div>
+      <div class="kpi-val">{{ requests|length }}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Active Requisitions</div>
+      <div class="kpi-val">{{ requests|length }}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Database Storage</div>
+      <div class="kpi-val" style="font-size: 1.15rem; color: #16a34a; font-family: monospace; padding-top: 0.25rem;">procurement.db (SQLite)</div>
+    </div>
+  </div>
+
+  <!-- Filter & Search Controls -->
+  <div class="filter-bar">
+    <div class="search-box">
+      <input type="text" id="logSearch" placeholder="🔍 Search ticket #, requester, department, or item name...">
+    </div>
+    <select id="deptFilter" class="filter-select">
+      <option value="">All Departments</option>
+      <option value="Media">Media</option>
+      <option value="IT">IT</option>
+      <option value="Data Science">Data Science</option>
+      <option value="Accounts / Finance">Accounts / Finance</option>
+      <option value="Translation">Translation</option>
+      <option value="HR">HR</option>
+      <option value="Admin">Admin</option>
+      <option value="Training Academy">Training Academy</option>
+      <option value="Executive Office">Executive Office</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <!-- Submissions Table (Fits Screen - No Horizontal Scroll) -->
+  <div class="table-card">
+    {% if requests %}
+    <table id="requestsTable">
+      <thead>
+        <tr>
+          <th class="col-ticket">Requisition &amp; Timeline</th>
+          <th class="col-requester">Requester &amp; Department</th>
+          <th class="col-item">Item &amp; Workload</th>
+          <th class="col-status">Status</th>
+          <th class="col-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in requests %}
+        <tr class="log-row" 
+            data-search="{{ r.ticket_number|lower }} {{ r.requester_name|lower }} {{ r.official_email|lower }} {{ r.department|lower }} {{ r.item_requested|lower }}"
+            data-dept="{{ r.department }}">
+          
+          <!-- Column 1: Ticket & Timeline -->
+          <td class="col-ticket">
+            <div><span class="ticket-badge">{{ r.ticket_number }}</span></div>
+            <div class="date-meta">
+              <span>Submitted: {{ r.date_of_request }}</span><br>
+              <span class="date-need">Need by: {{ r.date_required }}</span>
+            </div>
+          </td>
+
+          <!-- Column 2: Requester & Department -->
+          <td class="col-requester">
+            <div class="user-name">{{ r.requester_name }}</div>
+            <span class="user-email">{{ r.official_email }}</span>
+            <div><span class="dept-badge">{{ r.department }}{% if r.department == 'Other' %} ({{ r.other_department }}){% endif %}</span></div>
+            <div class="mgr-info">HOD: {{ r.hod_manager }}</div>
+          </td>
+
+          <!-- Column 3: Item & Specifications -->
+          <td class="col-item">
+            <div class="item-title">
+              <span>{{ r.item_requested }}</span>
+              <span class="qty-tag">Qty: {{ r.quantity }}</span>
+            </div>
+            <div class="item-category">{{ r.item_category }} &middot; {{ r.request_type }}</div>
+            <div class="item-purpose" title="{{ r.purpose }}">{{ r.purpose }}</div>
+          </td>
+
+          <!-- Column 4: Status -->
+          <td class="col-status">
+            <span class="status-badge">{{ r.status }}</span>
+          </td>
+
+          <!-- Column 5: Actions -->
+          <td class="col-actions">
+            <div class="action-stack">
+              <button type="button" class="btn-detail" onclick="openDetailsModal(
+                '{{ r.id }}',
+                '{{ r.ticket_number|escape }}',
+                '{{ r.date_of_request|escape }}',
+                '{{ r.requester_name|escape }}',
+                '{{ r.official_email|escape }}',
+                '{{ r.department|escape }}',
+                '{{ (r.other_department or '')|escape }}',
+                '{{ r.delivery_address|escape }}',
+                '{{ r.hod_manager|escape }}',
+                '{{ r.request_type|escape }}',
+                '{{ r.item_category|escape }}',
+                '{{ r.item_requested|escape }}',
+                '{{ r.quantity }}',
+                '{{ r.date_required|escape }}',
+                '{{ r.purpose|escape|replace('\n', ' ') }}',
+                '{{ (r.laptop_specs or 'N/A')|escape }}',
+                '{{ (r.pdf_filename or '') }}'
+              )">👁️ View</button>
+
+              <form action="/portal/delete/{{ r.id }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete requisition {{ r.ticket_number }} for {{ r.requester_name|escape }}?');">
+                <button type="submit" class="btn-delete" title="Delete this record">🗑️ Delete</button>
+              </form>
+            </div>
+          </td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📋</div>
+      <h3 style="font-size: 1.15rem; color: #1e293b;">No Procurement Requests in Log</h3>
+      <p style="margin-top: 0.35rem; font-size: 0.9rem;">All forms are currently cleared. When users submit requests, they will appear in this organized table.</p>
+      <a href="/" target="_blank" class="btn btn-outline" style="margin-top: 1rem;">Open Public Requisition Form</a>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+
+<!-- Details Modal -->
+<div class="modal-overlay" id="detailsModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modalTicket">Requisition Details</h3>
+      <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalContent">
+      <!-- Populated dynamically via JS -->
+    </div>
+    <div class="modal-footer">
+      <div>
+        <form id="modalDeleteForm" action="#" method="POST" onsubmit="return confirm('Are you sure you want to permanently delete this requisition from the database?');">
+          <button type="submit" class="btn btn-danger">🗑️ Delete Requisition</button>
+        </form>
+      </div>
+      <div class="modal-footer-right">
+        <a href="#" id="modalPdfBtn" class="btn btn-outline" target="_blank">📄 Download Archive PDF</a>
+        <button type="button" class="btn btn-outline" onclick="closeDetailsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Search & Department Filter
+  const searchInput = document.getElementById('logSearch');
+  const deptFilter = document.getElementById('deptFilter');
+  const rows = document.querySelectorAll('.log-row');
+
+  function filterLogs() {
+    const q = (searchInput.value || '').toLowerCase().trim();
+    const dept = (deptFilter.value || '').trim();
+
+    rows.forEach(r => {
+      const searchData = r.getAttribute('data-search') || '';
+      const rowDept = r.getAttribute('data-dept') || '';
+
+      const matchQ = !q || searchData.includes(q);
+      const matchDept = !dept || rowDept.includes(dept);
+
+      if (matchQ && matchDept) {
+        r.style.display = '';
+      } else {
+        r.style.display = 'none';
+      }
+    });
+  }
+
+  if (searchInput) searchInput.addEventListener('input', filterLogs);
+  if (deptFilter) deptFilter.addEventListener('change', filterLogs);
+
+  // Modal Populator
+  function openDetailsModal(id, ticket, date, name, email, dept, otherDept, address, hod, reqType, cat, item, qty, dateReq, purpose, specs, pdf) {
+    document.getElementById('modalTicket').textContent = `Requisition #${id} — ${ticket}`;
+    
+    let deptText = dept;
+    if (otherDept) deptText += ` (${otherDept})`;
+
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-row"><strong>Ticket Reference:</strong> <span class="ticket-badge">${ticket}</span></div>
+      <div class="modal-row"><strong>Submission Date:</strong> ${date}</div>
+      <div class="modal-row"><strong>Requester:</strong> ${name} &middot; <span style="color: #64748b;">${email}</span></div>
+      <div class="modal-row"><strong>Department:</strong> ${deptText}</div>
+      <div class="modal-row"><strong>Reporting HOD:</strong> ${hod}</div>
+      <div class="modal-row"><strong>Delivery Address:</strong> ${address}</div>
+      <hr style="margin: 0.85rem 0; border: 0; border-top: 1px solid #e2e8f0;">
+      <div class="modal-row"><strong>Item Requested:</strong> <strong style="color: #0f172a;">${item}</strong> (Qty: ${qty})</div>
+      <div class="modal-row"><strong>Category &amp; Type:</strong> ${cat} &middot; ${reqType}</div>
+      <div class="modal-row"><strong>Date Required:</strong> <span style="color: #b45309; font-weight: 600;">${dateReq}</span></div>
+      <div class="modal-row"><strong>Business Purpose:</strong><br><div style="background: #f8fafc; padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; border: 1px solid #e2e8f0; color: #334155; line-height: 1.45;">${purpose}</div></div>
+      ${specs && specs !== 'N/A' ? `<div class="modal-row" style="margin-top: 0.65rem;"><strong>Hardware Specs:</strong><br><small style="color: #475569;">${specs}</small></div>` : ''}
+    `;
+
+    document.getElementById('modalDeleteForm').action = `/portal/delete/${id}`;
+
+    const pdfBtn = document.getElementById('modalPdfBtn');
+    if (pdf && pdf.length > 0) {
+      pdfBtn.href = `/download/${id}`;
+      pdfBtn.style.display = 'inline-flex';
+    } else {
+      pdfBtn.style.display = 'none';
+    }
+
+    document.getElementById('detailsModal').classList.add('active');
+  }
+
+  function closeDetailsModal() {
+    document.getElementById('detailsModal').classList.remove('active');
+  }
+
+  // Close modal when clicking backdrop
+  document.getElementById('detailsModal').addEventListener('click', (e) => {
+    if (e.target.id === 'detailsModal') {
+      closeDetailsModal();
+    }
+  });
+</script>
+
+</body>
+</html>

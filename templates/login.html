@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Team Login - Procurement Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+  <style>
+    body {
+      background: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .login-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+    .login-header {
+      background: #1e3a8a;
+      color: white;
+      padding: 2rem 1.75rem;
+      text-align: center;
+    }
+    .login-header .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .login-header h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .login-header p {
+      font-size: 0.85rem;
+      color: #bfdbfe;
+      margin-top: 0.25rem;
+    }
+    .login-body {
+      padding: 2rem 1.75rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 0.4rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #0f172a;
+      transition: all 0.2s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #1a56db;
+      box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.15);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 0.85rem;
+      background: #1a56db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-login:hover {
+      background: #1e429f;
+    }
+    .error-alert {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #991b1b;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+    }
+    .back-link a {
+      color: #1a56db;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="icon">🔐</div>
+      <h1>IT Infrastructure Staff Portal</h1>
+      <p>Log in to review submitted procurement requests</p>
+    </div>
+
+    <div class="login-body">
+      {% if error %}
+      <div class="error-alert">
+        <span>⚠️</span> {{ error }}
+      </div>
+      {% endif %}
+
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="IT staff username" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-login">Sign In to Submissions Panel</button>
+      </form>
+
+      <div class="back-link">
+        <a href="/">&larr; Back to Public Requisition Form</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

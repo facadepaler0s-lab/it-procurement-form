@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Infrastructure Procurement Request Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Top Guidance & Action Bar -->
+    <div class="demo-banner">
+      <div class="demo-banner-content">
+        <h3>🚀 IT Procurement Portal</h3>
+        <p>Submit official equipment and service requests directly to the IT Infrastructure team.</p>
+      </div>
+      <div class="demo-banner-actions">
+        <button type="button" id="fillSampleBtn" class="btn btn-secondary btn-sm">💡 Load Demo Data</button>
+        <a href="/login" class="btn btn-purple btn-sm">🔐 IT Team Login</a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="form-header">
+      <div class="logo-area">
+        <div class="logo-icon">🖥️</div>
+        <h1>IT Infrastructure Procurement Request</h1>
+      </div>
+      <p class="subtitle">Request IT equipment, workstations, software, services, repairs or upgrades</p>
+      <span class="mandatory-note">Fields marked <strong>*</strong> are mandatory</span>
+    </header>
+
+    <!-- Main Submission Form (POST to /submit) -->
+    <form id="procurementForm" action="/submit" method="POST">
+
+      <!-- Hidden input to capture rendered department laptop spec -->
+      <input type="hidden" id="laptop_specs" name="laptop_specs" value="">
+      <!-- Hidden input for demo detection -->
+      <input type="hidden" id="is_demo" name="is_demo" value="0">
+
+      <!-- SECTION 1 -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">1</span>
+          <div>
+            <h2>Requester Information</h2>
+            <span class="section-desc">Your details and department</span>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="ticketNumber">IT ticket number <span class="req">*</span></label>
+            <input type="text" id="ticketNumber" name="ticketNumber" placeholder="e.g. IT-00012345" required>
+          </div>
+
+          <div class="field-group">
+            <label for="dateOfRequest">Date of request <span class="req">*</span></label>
+            <input type="date" id="dateOfRequest" name="dateOfRequest" required>
+          </div>
+
+          <div class="field-group">
+            <label for="requesterName">Requester's name <span class="req">*</span></label>
+            <input type="text" id="requesterName" name="requesterName" placeholder="Full name" required>
+          </div>
+
+          <div class="field-group">
+            <label for="officialEmail">Official email address <span class="req">*</span></label>
+            <input type="email" id="officialEmail" name="officialEmail" placeholder="employee@company.com" required>
+          </div>
+
+          <div class="field-group">
+            <label for="department">Department / team <span class="req">*</span></label>
+            <select id="department" name="department" required>
+              <option value="">— Select department —</option>
+              <option>Media</option>
+              <option>IT</option>
+              <option>Data Science</option>
+              <option>Accounts / Finance</option>
+              <option>Translation</option>
+              <option>HR</option>
+              <option>Admin</option>
+              <option>Training Academy</option>
+              <option>Executive Office</option>
+              <option>Other department</option>
+            </select>
+          </div>
+
+          <div class="field-group conditional" id="otherDeptGroup">
+            <label for="otherDeptName">Other department name <span class="req">*</span></label>
+            <input type="text" id="otherDeptName" name="otherDeptName" placeholder="Enter department name">
+          </div>
+
+          <div class="field-group">
+            <label for="hodManager">HOD / reporting manager <span class="req">*</span></label>
+            <input type="text" id="hodManager" name="hodManager" placeholder="Manager's full name" required>
+          </div>
+
+          <div class="field-group">
+            <label for="deliveryAddress">Location / delivery address <span class="req">*</span></label>
+            <input type="text" id="deliveryAddress" name="deliveryAddress" placeholder="Building, floor, desk" required>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">2</span>
+          <div>
+            <h2>Procurement Request</h2>
+            <span class="section-desc">Details of what you need</span>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="requestType">Request type <span class="req">*</span></label>
+            <select id="requestType" name="requestType" required>
+              <option value="">— Select type —</option>
+              <option>New purchase</option>
+              <option>Replacement</option>
+              <option>Upgrade</option>
+              <option>Repair / spare part</option>
+              <option>Software licence or subscription</option>
+              <option>Licence / subscription renewal</option>
+              <option>Service or maintenance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="itemCategory">Item category <span class="req">*</span></label>
+            <select id="itemCategory" name="itemCategory" required>
+              <option value="">— Select category —</option>
+              <option>Laptop / desktop</option>
+              <option>Monitor / display / projector</option>
+              <option>Keyboard / mouse / headset / accessories</option>
+              <option>Printer / scanner / consumables</option>
+              <option>Storage / backup device</option>
+              <option>Network / internet equipment</option>
+              <option>Software / licence / subscription</option>
+              <option>Server / infrastructure equipment</option>
+              <option>IT security equipment / service</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field-group full-width">
+            <label for="itemRequested">Item or service requested <span class="req">*</span></label>
+            <input type="text" id="itemRequested" name="itemRequested" placeholder="Describe the item or service"
+              required>
+          </div>
+
+          <div class="field-group">
+            <label for="quantity">Quantity <span class="req">*</span></label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+          </div>
+
+          <div class="field-group">
+            <label for="dateRequired">Date required <span class="req">*</span></label>
+            <input type="date" id="dateRequired" name="dateRequired" required>
+          </div>
+
+          <div class="field-group full-width">
+            <label for="purpose">Purpose / work to be performed <span class="req">*</span></label>
+            <textarea id="purpose" name="purpose" rows="3"
+              placeholder="Describe the business workload and why this is required" required></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3 (Displayed ONLY when Laptop / desktop is selected) -->
+      <section class="form-section" id="laptopSection" style="display: none;">
+        <div class="section-header">
+          <span class="section-number">3</span>
+          <div>
+            <h2>Department-based Laptop Configuration</h2>
+            <span class="section-desc">Standard specification for your department</span>
+          </div>
+        </div>
+
+        <div id="specDisplay"></div>
+
+        <h3 style="font-size: 0.95rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--gray-800);">🎒 Standard
+          Laptop Kit</h3>
+        <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 0.5rem;">The following are included with
+          every laptop request:</p>
+        <table class="accessories-table">
+          <thead>
+            <tr>
+              <th>Included Accessories</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="check-icon">✔</span> Carrying bag</td>
+            </tr>
+            <tr>
+              <td><span class="check-icon">✔</span> Mouse</td>
+            </tr>
+            <tr>
+              <td><span class="check-icon">✔</span> Headphones</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SECTION 4: Declaration -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">4</span>
+          <div>
+            <h2>Requester Declaration</h2>
+            <span class="section-desc">Confirm and submit to backend</span>
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="declaration1" name="declaration1" required>
+          <label for="declaration1">I confirm that the information provided is accurate to the best of my
+            knowledge.</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="declaration2" name="declaration2" required>
+          <label for="declaration2">I have entered the IT ticket number and verified the requirement with my reporting
+            manager.</label>
+        </div>
+      </section>
+
+      <!-- Submit Bar -->
+      <div class="submit-bar">
+        <span class="submit-info" id="submitInfo">Submitting records your request directly into the IT Procurement log
+          and alerts management. No printing required.</span>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="reset" id="resetBtn" class="btn btn-secondary">🔄 Reset Form</button>
+          <button type="submit" id="submitBtn" class="btn btn-primary">📨 Submit Request</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Infrastructure Procurement Request Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Isolated container for clean A4 printing (hidden on screen, active in @media print) -->
+  <div id="printContainer" class="print-only"></div>
+
+  <div class="page-wrapper">
+
+    <!-- Interactive Top Banner & Actions -->
+    <div class="demo-banner">
+      <div class="demo-banner-content">
+        <h3>🚀 IT Procurement Portal</h3>
+        <p>Complete the requisition below to generate an official <strong>Printable Document</strong> and <strong>Email Alert</strong>.</p>
+      </div>
+      <div class="demo-banner-actions">
+        <button type="button" id="topResetBtn" class="btn btn-secondary btn-sm" style="border-color: var(--danger-border); color: var(--danger);">🔄 Reset Form</button>
+        <button type="button" id="fillSampleBtn" class="btn btn-secondary btn-sm">💡 Load Sample Demo Data (View only)</button>
+        <button type="button" id="openDemoDirectBtn" class="btn btn-purple btn-sm">👁️ Preview Output Document</button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="form-header">
+      <div class="logo-area">
+        <div class="logo-icon">🖥️</div>
+        <h1>IT Infrastructure Procurement Request</h1>
+      </div>
+      <p class="subtitle">Official requisition portal for workstations, hardware, software licenses, repairs, and accessories</p>
+      <span class="mandatory-note">Fields marked <strong>*</strong> are mandatory</span>
+    </header>
+
+    <!-- Progress Indicator -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill"></div>
+    </div>
+
+    <!-- Main Submission Form -->
+    <form id="procurementForm" action="javascript:void(0);" onsubmit="return false;" novalidate>
+
+      <!-- SECTION 1: Requester Information -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">1</span>
+          <div>
+            <h2>Requester Information</h2>
+            <span class="section-desc">Employee identification and organizational department</span>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="ticketNumber">IT ticket number <span class="req">*</span></label>
+            <input type="text" id="ticketNumber" name="ticketNumber" placeholder="e.g. INC-00012345" required>
+          </div>
+
+          <div class="field-group">
+            <label for="dateOfRequest">Date of request <span class="req">*</span></label>
+            <input type="date" id="dateOfRequest" name="dateOfRequest" required>
+          </div>
+
+          <div class="field-group">
+            <label for="requesterName">Requester's name <span class="req">*</span></label>
+            <input type="text" id="requesterName" name="requesterName" placeholder="Full name" required>
+          </div>
+
+          <div class="field-group">
+            <label for="officialEmail">Official email address <span class="req">*</span></label>
+            <input type="email" id="officialEmail" name="officialEmail" placeholder="employee@company.com" required>
+          </div>
+
+          <div class="field-group">
+            <label for="department">Department / team <span class="req">*</span></label>
+            <select id="department" name="department" required>
+              <option value="">— Select department —</option>
+              <option>Media</option>
+              <option>IT</option>
+              <option>Data Science</option>
+              <option>Accounts / Finance</option>
+              <option>Translation</option>
+              <option>HR</option>
+              <option>Admin</option>
+              <option>Training Academy</option>
+              <option>Executive Office</option>
+              <option>Other department</option>
+            </select>
+          </div>
+
+          <div class="field-group conditional" id="otherDeptGroup">
+            <label for="otherDeptName">Other department name <span class="req">*</span></label>
+            <input type="text" id="otherDeptName" name="otherDeptName" placeholder="Enter department name">
+          </div>
+
+          <div class="field-group">
+            <label for="projectUnit">Project / unit</label>
+            <input type="text" id="projectUnit" name="projectUnit" placeholder="Optional project name">
+          </div>
+
+          <div class="field-group">
+            <label for="deliveryAddress">Location / delivery address <span class="req">*</span></label>
+            <input type="text" id="deliveryAddress" name="deliveryAddress" placeholder="Building, floor, desk/bay" required>
+          </div>
+
+          <div class="field-group">
+            <label for="hodManager">HOD / reporting manager <span class="req">*</span></label>
+            <input type="text" id="hodManager" name="hodManager" placeholder="Manager's full name" required>
+          </div>
+
+          <div class="field-group">
+            <label for="contactNumber">Contact number</label>
+            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Optional phone / extension">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: Procurement Requirements -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">2</span>
+          <div>
+            <h2>Procurement Request</h2>
+            <span class="section-desc">Details of requested hardware, equipment, or service</span>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="requestType">Request type <span class="req">*</span></label>
+            <select id="requestType" name="requestType" required>
+              <option value="">— Select type —</option>
+              <option>New purchase</option>
+              <option>Replacement</option>
+              <option>Upgrade</option>
+              <option>Repair / spare part</option>
+              <option>Software licence or subscription</option>
+              <option>Licence / subscription renewal</option>
+              <option>Service or maintenance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="itemCategory">Item category <span class="req">*</span></label>
+            <select id="itemCategory" name="itemCategory" required>
+              <option value="">— Select category —</option>
+              <option>Laptop / desktop</option>
+              <option>Monitor / display / projector</option>
+              <option>Keyboard / mouse / headset / accessories</option>
+              <option>Printer / scanner / consumables</option>
+              <option>Storage / backup device</option>
+              <option>Network / internet equipment</option>
+              <option>Software / licence / subscription</option>
+              <option>Server / infrastructure equipment</option>
+              <option>IT security equipment / service</option>
+              <option>Repair / replacement part</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field-group full-width">
+            <label for="itemRequested">Item or service requested <span class="req">*</span></label>
+            <input type="text" id="itemRequested" name="itemRequested" placeholder="e.g. High-Performance Engineering Workstation" required>
+          </div>
+
+          <div class="field-group">
+            <label for="quantity">Quantity <span class="req">*</span></label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+          </div>
+
+          <div class="field-group">
+            <label for="intendedUsers">Name(s) of intended user(s) / team <span class="req">*</span></label>
+            <input type="text" id="intendedUsers" name="intendedUsers" placeholder="User or team name" required>
+          </div>
+
+          <div class="field-group full-width">
+            <label for="purpose">Purpose / work to be performed <span class="req">*</span></label>
+            <textarea id="purpose" name="purpose" rows="3" placeholder="Describe operational tasks, applications, and work justification" required></textarea>
+          </div>
+
+          <div class="field-group">
+            <label for="dateRequired">Date required <span class="req">*</span></label>
+            <input type="date" id="dateRequired" name="dateRequired" required>
+          </div>
+
+          <div class="field-group">
+            <label for="preferredBrand">Preferred brand or model, if any</label>
+            <input type="text" id="preferredBrand" name="preferredBrand" placeholder="e.g. Dell Latitude, Apple MacBook, Lenovo ThinkPad">
+          </div>
+
+          <div class="field-group full-width">
+            <label for="additionalRequirements">Additional requirements or notes</label>
+            <textarea id="additionalRequirements" name="additionalRequirements" rows="2" placeholder="Any special peripherals, display adapters, or software installations required"></textarea>
+          </div>
+        </div>
+
+        <!-- Dynamic Additional Items Container -->
+        <div id="itemsContainer"></div>
+        <div style="margin-top: 1rem;">
+          <button type="button" id="addItemBtn" class="btn btn-secondary btn-sm">➕ Add another item</button>
+        </div>
+      </section>
+
+      <!-- SECTION 3: Laptop Configuration (Conditional: Displayed ONLY for Laptop / desktop) -->
+      <section class="form-section conditional" id="laptopSection" style="display: none;">
+        <div class="section-header">
+          <span class="section-number">3</span>
+          <div>
+            <h2>Department-based Laptop Configuration</h2>
+            <span class="section-desc">Standard organization hardware specification for your department</span>
+          </div>
+        </div>
+
+        <div id="specDisplay"></div>
+
+        <h3 style="font-size: 0.95rem; font-weight: 700; margin: 1.25rem 0 0.5rem; color: var(--gray-800);">🎒 Standard Laptop Kit</h3>
+        <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 0.5rem;">The following are included with every laptop requisition:</p>
+        <table class="accessories-table">
+          <thead>
+            <tr><th>Included Accessories</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="check-icon">✔</span> Carrying bag</td></tr>
+            <tr><td><span class="check-icon">✔</span> Mouse</td></tr>
+            <tr><td><span class="check-icon">✔</span> Headphones</td></tr>
+          </tbody>
+        </table>
+
+        <div class="field-grid" style="margin-top: 1.25rem;">
+          <div class="field-group">
+            <label for="additionalAccessories">Are any additional accessories required? <span class="req">*</span></label>
+            <select id="additionalAccessories" name="additionalAccessories">
+              <option value="">— Select —</option>
+              <option>No</option>
+              <option>Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="conditional" id="additionalAccessoriesFields">
+          <div class="field-grid" style="margin-top: 1rem;">
+            <div class="field-group full-width">
+              <label for="accessoryDetail">Additional accessory and quantity <span class="req">*</span></label>
+              <input type="text" name="accessoryDetail" id="accessoryDetail" placeholder="e.g. 4K Webcam × 1, USB-C Docking Station × 1">
+            </div>
+            <div class="field-group full-width">
+              <label for="accessoryJustification">Business justification <span class="req">*</span></label>
+              <textarea name="accessoryJustification" id="accessoryJustification" rows="2" placeholder="Why are these additional accessories needed?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+        <h3 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-800);">⚙️ Configuration Confirmation</h3>
+
+        <div class="field-grid">
+          <div class="field-group full-width">
+            <label for="configConfirmation">Does the displayed standard configuration meet your requirement? <span class="req">*</span></label>
+            <select id="configConfirmation" name="configConfirmation">
+              <option value="">— Select —</option>
+              <option>Yes — proceed with the standard configuration</option>
+              <option>No — request a different configuration</option>
+              <option>Unsure / no standard is listed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="conditional" id="configYesMsg">
+          <div class="info-box green">
+            ✅ <strong>Standard configuration confirmed.</strong> Your request will be fulfilled according to the standard department specification.
+          </div>
+        </div>
+
+        <div class="conditional" id="configNoFields">
+          <div class="info-box red" style="margin-bottom: 1rem;">
+            ⚠️ <strong>Non-standard configuration requested.</strong> Please obtain approval from your HOD and CEO, and attach both approvals below before submitting.
+          </div>
+
+          <div class="field-grid">
+            <div class="field-group full-width">
+              <label for="requestedConfig">Requested custom configuration <span class="req">*</span></label>
+              <textarea name="requestedConfig" id="requestedConfig" rows="2" placeholder="Describe the configuration needed (Processor, RAM, GPU, Storage)"></textarea>
+            </div>
+            <div class="field-group full-width">
+              <label for="configDifference">Difference from standard configuration <span class="req">*</span></label>
+              <textarea name="configDifference" id="configDifference" rows="2" placeholder="Specify which components differ and why"></textarea>
+            </div>
+            <div class="field-group full-width">
+              <label for="configJustification">Business justification <span class="req">*</span></label>
+              <textarea name="configJustification" id="configJustification" rows="2" placeholder="Detailed business justification for exceeding standard tier"></textarea>
+            </div>
+            <div class="field-group full-width">
+              <label for="configWorkload">Applications / workload requiring the change</label>
+              <textarea name="configWorkload" id="configWorkload" rows="2" placeholder="Optional — list specific compute/graphics-intensive software"></textarea>
+            </div>
+
+            <div class="field-group">
+              <label>HOD approval <span class="req">*</span></label>
+              <div class="file-upload-area">
+                <input type="file" name="hodApproval" id="hodApproval" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                <div class="upload-icon">📤</div>
+                <div class="upload-text"><strong>Click to upload</strong> or drag & drop<br>PDF, DOC, JPG</div>
+              </div>
+              <div class="file-list" id="hodApprovalList"></div>
+            </div>
+
+            <div class="field-group">
+              <label>CEO approval <span class="req">*</span></label>
+              <div class="file-upload-area">
+                <input type="file" name="ceoApproval" id="ceoApproval" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                <div class="upload-icon">📤</div>
+                <div class="upload-text"><strong>Click to upload</strong> or drag & drop<br>PDF, DOC, JPG</div>
+              </div>
+              <div class="file-list" id="ceoApprovalList"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="conditional" id="configUnsureMsg">
+          <div class="info-box blue">
+            ℹ️ <strong>IT Infrastructure will review</strong> your workload requirement and advise on the appropriate hardware configuration and approvals.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: Existing Equipment Details (Conditional) -->
+      <section class="form-section conditional" id="existingEquipSection">
+        <div class="section-header">
+          <span class="section-number">4</span>
+          <div>
+            <h2>Existing Equipment Details</h2>
+            <span class="section-desc">Required for replacement, upgrade, repair, or renewal requests</span>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="existingItem">Existing item / model</label>
+            <input type="text" id="existingItem" name="existingItem" placeholder="e.g. Dell Latitude 5420">
+          </div>
+          <div class="field-group">
+            <label for="assetId">Asset ID / serial number</label>
+            <input type="text" id="assetId" name="assetId" placeholder="e.g. AST-00984">
+          </div>
+          <div class="field-group">
+            <label for="currentUser">Current user</label>
+            <input type="text" id="currentUser" name="currentUser" placeholder="Employee currently assigned">
+          </div>
+          <div class="field-group">
+            <label for="purchaseDate">Purchase date, if known</label>
+            <input type="date" id="purchaseDate" name="purchaseDate">
+          </div>
+          <div class="field-group">
+            <label for="warrantyExpiry">Warranty expiry, if known</label>
+            <input type="date" id="warrantyExpiry" name="warrantyExpiry">
+          </div>
+          <div class="field-group">
+            <label for="relatedTicket">Related support ticket number, if any</label>
+            <input type="text" id="relatedTicket" name="relatedTicket" placeholder="Optional IT ticket">
+          </div>
+          <div class="field-group full-width">
+            <label for="issueReason">Issue faced / reason for request <span class="req">*</span></label>
+            <textarea id="issueReason" name="issueReason" rows="2" placeholder="Describe the defect, performance limitation, or hardware issue"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: Requester Declaration -->
+      <section class="form-section">
+        <div class="section-header">
+          <span class="section-number">5</span>
+          <div>
+            <h2>Requester Declaration</h2>
+            <span class="section-desc">Verification and authorization confirmation</span>
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="declaration1" name="declaration1" required>
+          <label for="declaration1">I confirm that the procurement request details provided are accurate and required for official duties.</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="declaration2" name="declaration2" required>
+          <label for="declaration2">I have entered the official IT ticket number and verified all requirements with my reporting manager.</label>
+        </div>
+
+        <div class="field-grid" style="margin-top: 1.25rem;">
+          <div class="field-group">
+            <label for="declarationName">Requester's name <span class="req">*</span></label>
+            <input type="text" id="declarationName" name="declarationName" required>
+          </div>
+          <div class="field-group">
+            <label for="declarationDate">Date <span class="req">*</span></label>
+            <input type="date" id="declarationDate" name="declarationDate" required>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="submit-bar">
+        <span class="submit-info">Submitting validates the requisition and opens the Official Document &amp; Email Dispatch Hub.</span>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="button" id="resetBtn" class="btn btn-secondary btn-block-mobile">🔄 Reset Form</button>
+          <button type="button" id="printBtn" class="btn btn-secondary btn-block-mobile">🖨️ Direct Print</button>
+          <button type="button" id="submitBtn" class="btn btn-primary btn-block-mobile">📨 Submit Request</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       MODAL: REQUISITION OUTPUT HUB (PDF PREVIEW & EMAIL ALERT)
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="demoModal">
+    <div class="modal-box">
+      
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <span style="font-size: 1.6rem;">🎯</span>
+          <div>
+            <h3>Procurement Request Output Hub</h3>
+            <p>Your request has been compiled. You can print the official requisition or dispatch via email:</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      </div>
+
+      <!-- Clean 2-Option Tabs -->
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn active" data-tab="tab-pdf">
+          <span>📄</span> 1. Printable Requisition Form (PDF)
+        </button>
+        <button type="button" class="modal-tab-btn" data-tab="tab-email">
+          <span>✉️</span> 2. Automated Email Alert (Send to IT &amp; HOD)
+        </button>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="modal-tab-body">
+        
+        <!-- Sample Demo Mode Notice -->
+        <div class="sample-mode-banner" id="sampleNoticeBanner" style="display: none;">
+          <span style="font-size: 1.3rem;">💡</span>
+          <div>
+            <strong>Sample Demo Mode Active:</strong> This preview illustrates data formatting. <strong>Printing is disabled for sample data.</strong> Please submit genuine requisition details to print the official document.
+          </div>
+        </div>
+
+        <!-- TAB 1: Printable Requisition Document (PDF Preview) -->
+        <div class="tab-pane active" id="tab-pdf">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h4 style="color: var(--gray-900); font-size: 0.95rem;">Formatted Procurement Requisition Document</h4>
+              <p style="font-size: 0.8rem; color: var(--gray-500);">Prints clean on single/exact A4 pages with all form details and signature boxes.</p>
+            </div>
+            <button type="button" id="downloadDocBtn" class="btn btn-primary btn-sm">🖨️ Direct Print / Save as PDF</button>
+          </div>
+
+          <!-- Printable Document Container -->
+          <div class="printable-document" id="docPreviewArea">
+            <div class="doc-watermark">SAMPLE DEMO</div>
+
+            <div class="doc-header">
+              <div class="doc-header-left">
+                <h2>IT Infrastructure Procurement Requisition</h2>
+                <p>Generated on <span id="docGeneratedDate">-</span> · Official Organization Requisition Copy</p>
+              </div>
+              <div class="doc-ticket-badge">
+                <span class="lbl">IT Ticket Number</span>
+                <span class="val" id="docTicketNum">INC-00012345</span>
+              </div>
+            </div>
+
+            <!-- 1. Requester & Org Details -->
+            <div class="doc-section-title">1. Requester &amp; Organizational Details</div>
+            <div class="doc-grid">
+              <div class="doc-row"><span class="doc-label">Requester Name:</span><span class="doc-val" id="docReqName">-</span></div>
+              <div class="doc-row"><span class="doc-label">Request Date:</span><span class="doc-val" id="docReqDate">-</span></div>
+              <div class="doc-row"><span class="doc-label">Official Email:</span><span class="doc-val" id="docReqEmail">-</span></div>
+              <div class="doc-row"><span class="doc-label">Department:</span><span class="doc-val" id="docDept">-</span></div>
+              <div class="doc-row"><span class="doc-label">Project / Unit:</span><span class="doc-val" id="docProject">-</span></div>
+              <div class="doc-row"><span class="doc-label">Reporting HOD:</span><span class="doc-val" id="docHod">-</span></div>
+              <div class="doc-row"><span class="doc-label">Contact Number:</span><span class="doc-val" id="docContact">-</span></div>
+              <div class="doc-row"><span class="doc-label">Delivery Location:</span><span class="doc-val" id="docLoc">-</span></div>
+            </div>
+
+            <!-- 2. Procurement Requirements -->
+            <div class="doc-section-title">2. Procurement Requirements</div>
+            <div class="doc-grid">
+              <div class="doc-row"><span class="doc-label">Request Type:</span><span class="doc-val" id="docReqType">-</span></div>
+              <div class="doc-row"><span class="doc-label">Item Category:</span><span class="doc-val" id="docCategory">-</span></div>
+              <div class="doc-row"><span class="doc-label">Date Required:</span><span class="doc-val" id="docDateReq">-</span></div>
+              <div class="doc-row"><span class="doc-label">Preferred Brand:</span><span class="doc-val" id="docBrand">-</span></div>
+              <div class="doc-row" style="grid-column: 1 / -1;"><span class="doc-label">Intended User(s):</span><span class="doc-val" id="docIntendedUsers">-</span></div>
+            </div>
+
+            <div class="doc-box">
+              <span style="font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 0.25rem;">Primary Requested Item &amp; Purpose:</span>
+              <div id="docItemAndPurpose">-</div>
+            </div>
+
+            <div class="doc-box" id="docAdditionalItemsBox" style="display: none;"></div>
+            <div class="doc-box" id="docLaptopBox" style="display: none;"></div>
+            <div class="doc-box" id="docExistingBox" style="display: none;"></div>
+
+            <!-- Signatures -->
+            <div class="doc-signatures">
+              <div class="doc-sig-box">
+                <span style="font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 0.35rem;">Requester Confirmation &amp; Declaration:</span>
+                <p>Certified that the request is required for official business duties.</p>
+                <p style="margin-top: 0.5rem;">Digitally Signed By: <strong id="docSigRequester">-</strong></p>
+                <p style="color: var(--gray-500);">Date: <span id="docSigDate">-</span></p>
+              </div>
+              <div class="doc-sig-box">
+                <span style="font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 0.35rem;">Approval &amp; Verification Workflow:</span>
+                <p>HOD Review: <strong>Pending Official Review</strong></p>
+                <p>IT Infrastructure Verification: <strong>Initiated</strong></p>
+                <p style="color: var(--gray-500); margin-top: 0.5rem;">Ticket Status: <strong>SUBMITTED</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Automated Multi-Party Email Alert -->
+        <div class="tab-pane" id="tab-email">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h4 style="color: var(--gray-900); font-size: 0.95rem;">Automated Multi-Party Email Notification</h4>
+              <p style="font-size: 0.8rem; color: var(--gray-500);">Pre-formatted email with all details, ready to dispatch directly to IT and HOD.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button type="button" id="copyEmailBtn" class="btn btn-secondary btn-sm">📋 Copy Email Text</button>
+              <a id="emailMailtoLink" href="#" class="btn btn-accent btn-sm">✉️ Send via Outlook / Mail Client</a>
+            </div>
+          </div>
+
+          <div class="email-client">
+            <div class="email-header-fields">
+              <div class="email-field-row">
+                <span class="email-field-lbl">To:</span>
+                <span class="email-field-val" id="emailTo">it-procurement@company.internal</span>
+              </div>
+              <div class="email-field-row">
+                <span class="email-field-lbl">Cc:</span>
+                <span class="email-field-val" id="emailCc">-</span>
+              </div>
+              <div class="email-field-row">
+                <span class="email-field-lbl">Subject:</span>
+                <span class="email-field-val" id="emailSubject" style="font-weight: 700; color: #1e3a8a;">[Procurement Request] INC-00012345</span>
+              </div>
+            </div>
+            <div class="email-body" id="emailBodyContent"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <span style="font-size: 0.8rem; color: var(--gray-500);">IT Infrastructure Procurement System</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="modalCloseFooterBtn">Done / Close</button>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

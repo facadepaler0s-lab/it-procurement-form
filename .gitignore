@@ -1,0 +1,18 @@
+# Virtual environment & Python cache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment & local secrets
+.env
+
+# Local SQLite database & generated PDF archives
+*.db
+procurement.db
+generated_pdfs/
+generated_requisitions/
+
+# Scratch / temporary QA files
+scratch/
+

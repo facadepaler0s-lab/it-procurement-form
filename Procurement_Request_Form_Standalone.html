@@ -1,0 +1,2671 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Infrastructure Procurement Request Form</title>
+  <style>
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #1a56db;
+  --primary-light: #e1effe;
+  --primary-dark: #1e429f;
+  --accent: #0e9f6e;
+  --accent-light: #def7ec;
+  --danger: #e02424;
+  --danger-light: #fde8e8;
+  --warning: #c27803;
+  --warning-light: #fdf6b2;
+  --purple: #7e3af2;
+  --purple-light: #edebfe;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition: 0.2s ease;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8eef8 100%);
+  color: var(--gray-800);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.page-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Demo Top Banner */
+.demo-banner {
+  background: #fff;
+  border-left: 5px solid var(--purple);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.demo-banner-content h3 {
+  font-size: 0.95rem;
+  color: var(--gray-900);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-banner-content p {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  margin-top: 0.2rem;
+}
+
+.demo-banner-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ── Header ── */
+.form-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.form-header .logo-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.form-header .logo-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.form-header h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+}
+
+.form-header .subtitle {
+  color: var(--gray-500);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.mandatory-note {
+  display: inline-block;
+  background: var(--warning-light);
+  color: var(--warning);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-top: 0.75rem;
+}
+
+/* ── Progress bar ── */
+.progress-bar-container {
+  background: var(--gray-200);
+  border-radius: 999px;
+  height: 6px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ── Sections ── */
+.form-section {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--gray-200);
+  transition: box-shadow var(--transition);
+}
+
+.form-section:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gray-100);
+}
+
+.section-number {
+  width: 36px;
+  height: 36px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.section-number.it-section {
+  background: var(--accent);
+}
+
+.section-header h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.section-header .section-desc {
+  font-size: 0.82rem;
+  color: var(--gray-500);
+  font-weight: 400;
+}
+
+/* ── Field Grid ── */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.field-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.field-group label .req {
+  color: var(--danger);
+  margin-left: 2px;
+}
+
+/* ── Inputs ── */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1.5px solid var(--gray-300);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--gray-800);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+}
+
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(224, 36, 36, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+/* File upload */
+.file-upload-area {
+  border: 2px dashed var(--gray-300);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  position: relative;
+}
+
+.file-upload-area:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.file-upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload-area .upload-icon {
+  font-size: 1.5rem;
+  color: var(--gray-400);
+  margin-bottom: 0.35rem;
+}
+
+.file-upload-area .upload-text {
+  font-size: 0.82rem;
+  color: var(--gray-500);
+}
+
+.file-upload-area .upload-text strong {
+  color: var(--primary);
+}
+
+.file-list {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.file-list .file-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  color: var(--gray-600);
+}
+
+.file-list .file-item .remove-file {
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+}
+
+/* ── Info boxes ── */
+.info-box {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 1rem 0;
+}
+
+.info-box.blue {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  color: var(--primary-dark);
+}
+
+.info-box.green {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  color: #065f46;
+}
+
+.info-box.yellow {
+  background: var(--warning-light);
+  border-left: 4px solid var(--warning);
+  color: #92400e;
+}
+
+.info-box.red {
+  background: var(--danger-light);
+  border-left: 4px solid var(--danger);
+  color: #991b1b;
+}
+
+/* ── Spec card ── */
+.spec-card {
+  background: var(--gray-50);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin: 1rem 0;
+}
+
+.spec-card h4 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spec-card .spec-line {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.spec-card .spec-line:last-child {
+  border-bottom: none;
+}
+
+.spec-card .spec-label {
+  font-weight: 600;
+  color: var(--gray-700);
+  min-width: 90px;
+}
+
+.spec-card .spec-value {
+  color: var(--gray-600);
+}
+
+/* ── Accessories table ── */
+.accessories-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+}
+
+.accessories-table th {
+  background: var(--gray-100);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--gray-700);
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.accessories-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-600);
+}
+
+.accessories-table td .check-icon {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: 1.5px solid var(--gray-300);
+}
+
+.btn-secondary:hover {
+  background: var(--gray-200);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  background: #087f58;
+}
+
+.btn-purple {
+  background: var(--purple);
+  color: #fff;
+}
+
+.btn-purple:hover {
+  background: #6c2bd9;
+}
+
+.btn-danger {
+  background: var(--danger-light);
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 0.45rem 1rem;
+  font-size: 0.84rem;
+}
+
+.btn-block-mobile {
+  display: inline-flex;
+}
+
+/* ── Checkbox ── */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-group label {
+  font-size: 0.88rem;
+  color: var(--gray-700);
+  cursor: pointer;
+}
+
+/* ── Multi-item rows ── */
+.item-row {
+  background: var(--gray-50);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.item-row .item-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.item-row .item-row-header h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+/* ── IT Review table ── */
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.review-table th,
+.review-table td {
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.review-table th {
+  background: var(--gray-50);
+  font-weight: 600;
+  color: var(--gray-700);
+  width: 45%;
+}
+
+.review-table td {
+  color: var(--gray-600);
+}
+
+.review-table input,
+.review-table select,
+.review-table textarea {
+  border: 1.5px solid var(--gray-300);
+}
+
+/* ── Status badge ── */
+.status-badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.status-badge-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--gray-300);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--gray-600);
+  background: #fff;
+}
+
+.status-badge-group input[type="radio"] {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+.status-badge-group input[type="radio"]:checked + label,
+.status-badge-group label.selected {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ── Submit bar ── */
+.submit-bar {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--gray-200);
+}
+
+.submit-bar .submit-info {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+
+/* ── Toast ── */
+.toast-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toast {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  min-width: 320px;
+  animation: slideIn 0.3s ease;
+  border-left: 4px solid var(--accent);
+}
+
+.toast.error {
+  border-left-color: var(--danger);
+}
+
+.toast.warning {
+  border-left-color: var(--warning);
+}
+
+.toast .toast-icon {
+  font-size: 1.2rem;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ── Conditional display ── */
+.conditional {
+  display: none;
+}
+
+.conditional.visible {
+  display: block;
+}
+
+.section-divider {
+  border: none;
+  border-top: 2px dashed var(--gray-200);
+  margin: 2rem 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MODAL: SUBMISSION & DISPATCH HUB
+   ══════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 860px;
+  width: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--gray-50);
+}
+
+.modal-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modal-header h3 {
+  font-size: 1.15rem;
+  color: var(--gray-900);
+  font-weight: 700;
+}
+
+.modal-header p {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+}
+
+.modal-close-btn:hover {
+  color: var(--gray-800);
+  background: var(--gray-200);
+}
+
+/* Tabs */
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--gray-200);
+  background: #fff;
+}
+
+.modal-tab-btn {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+
+.modal-tab-btn:hover {
+  color: var(--primary);
+  background: var(--gray-50);
+}
+
+.modal-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.modal-tab-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Demo Notice Banner inside Modal */
+.sample-mode-banner {
+  background: #fffbeb;
+  border: 1.5px solid #fde68a;
+  color: #92400e;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.83rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Printable Requisition Document Box ── */
+.printable-document {
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: var(--radius);
+  font-size: 0.86rem;
+  color: #0f172a;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  line-height: 1.55;
+  position: relative;
+}
+
+.doc-watermark {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: rgba(220, 38, 38, 0.12);
+  border: 4px dashed rgba(220, 38, 38, 0.2);
+  padding: 0.5rem 2rem;
+  border-radius: 12px;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.printable-document.is-sample .doc-watermark {
+  display: block;
+}
+
+.doc-header {
+  border-bottom: 2.5px solid #1e3a8a;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.doc-header-left h2 {
+  font-size: 1.25rem;
+  color: #1e3a8a;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doc-header-left p {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+.doc-ticket-badge {
+  text-align: right;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+}
+
+.doc-ticket-badge .lbl {
+  font-size: 0.72rem;
+  color: #166534;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+}
+
+.doc-ticket-badge .val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #15803d;
+  font-family: monospace;
+}
+
+.doc-section-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  background: #f1f5f9;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  margin: 1rem 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+.doc-row {
+  display: flex;
+  font-size: 0.84rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px dotted #e2e8f0;
+}
+
+.doc-label {
+  font-weight: 600;
+  width: 150px;
+  color: #475569;
+  flex-shrink: 0;
+}
+
+.doc-val {
+  color: #0f172a;
+  flex: 1;
+}
+
+.doc-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.85rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  font-size: 0.84rem;
+}
+
+.doc-signatures {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border-top: 1.5px solid #cbd5e1;
+  padding-top: 1.25rem;
+  font-size: 0.82rem;
+}
+
+.doc-sig-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  padding: 0.85rem;
+}
+
+/* ── Email Preview Client ── */
+.email-client {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  background: #fff;
+  overflow: hidden;
+}
+
+.email-header-fields {
+  background: var(--gray-50);
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 0.84rem;
+}
+
+.email-field-row {
+  display: flex;
+  margin-bottom: 0.45rem;
+}
+
+.email-field-row:last-child {
+  margin-bottom: 0;
+}
+
+.email-field-lbl {
+  width: 75px;
+  font-weight: 700;
+  color: var(--gray-500);
+}
+
+.email-field-val {
+  color: var(--gray-800);
+  word-break: break-all;
+}
+
+.email-body {
+  padding: 1.5rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PRINT CONTAINER & PRINT MEDIA CSS (CRITICAL FIX)
+   ══════════════════════════════════════════════════════════════ */
+#printContainer {
+  display: none;
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
+@media print {
+  /* Ensure exact color reproduction and zero background artifacts */
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    font-size: 11pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .page-wrapper,
+  .demo-banner,
+  .form-header,
+  .progress-bar-container,
+  .form-section,
+  .submit-bar,
+  .modal-overlay,
+  .toast-container,
+  .section-divider {
+    display: none !important;
+  }
+
+  /* Make ONLY the printContainer visible, filling the exact A4 page */
+  #printContainer,
+  #printContainer * {
+    visibility: visible !important;
+  }
+
+  #printContainer {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    page-break-before: avoid !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  .printable-document {
+    border: 1.5px solid #1e3a8a !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    padding: 6mm 8mm !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    background: #fff !important;
+  }
+
+  .doc-header {
+    border-bottom: 2px solid #1e3a8a !important;
+    padding-bottom: 0.35rem !important;
+    margin-bottom: 0.45rem !important;
+  }
+
+  .doc-header-left h2 {
+    font-size: 1.15rem !important;
+    line-height: 1.2 !important;
+    color: #1e3a8a !important;
+  }
+
+  .doc-header-left p {
+    font-size: 0.72rem !important;
+    color: #475569 !important;
+    margin-top: 0.1rem !important;
+  }
+
+  .doc-ticket-badge {
+    padding: 0.3rem 0.6rem !important;
+    border-radius: 4px !important;
+  }
+
+  .doc-ticket-badge .lbl {
+    font-size: 0.62rem !important;
+  }
+
+  .doc-ticket-badge .val {
+    font-size: 0.95rem !important;
+  }
+
+  .doc-section-title {
+    font-size: 0.74rem !important;
+    padding: 0.2rem 0.45rem !important;
+    margin: 0.35rem 0 0.25rem !important;
+    background: #f1f5f9 !important;
+    color: #1e3a8a !important;
+  }
+
+  .doc-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.15rem 1rem !important;
+  }
+
+  .doc-row {
+    font-size: 0.73rem !important;
+    padding: 0.1rem 0 !important;
+    border-bottom: 1px dotted #e2e8f0 !important;
+  }
+
+  .doc-label {
+    width: 125px !important;
+    font-size: 0.73rem !important;
+    color: #475569 !important;
+  }
+
+  .doc-val {
+    font-size: 0.73rem !important;
+    color: #0f172a !important;
+  }
+
+  .doc-box {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 0.4rem 0.6rem !important;
+    margin-top: 0.3rem !important;
+    border-radius: 4px !important;
+    font-size: 0.73rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .doc-signatures {
+    margin-top: 0.45rem !important;
+    padding-top: 0.4rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+    border-top: 1.5px solid #cbd5e1 !important;
+  }
+
+  .doc-sig-box {
+    background: #f8fafc !important;
+    border: 1px dashed #cbd5e1 !important;
+    padding: 0.4rem 0.6rem !important;
+    border-radius: 4px !important;
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-wrapper {
+    padding: 1rem 0.75rem 3rem;
+  }
+  .form-section {
+    padding: 1.25rem;
+  }
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .submit-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+  .btn-block-mobile {
+    width: 100%;
+    justify-content: center;
+  }
+  .doc-grid,
+  .doc-signatures {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Hidden isolated container for clean, single-document printing -->
+<div id="printContainer" class="print-only"></div>
+
+<div class="page-wrapper">
+
+  <!-- Interactive Demo Guidance Bar with TOP RESET BUTTON -->
+  <div class="demo-banner">
+    <div class="demo-banner-content">
+      <h3>🚀 IT Procurement Portal</h3>
+      <p>Fill out the form, then submit to generate your <strong>Printable Document</strong> or <strong>Automated Email Alert</strong>.</p>
+    </div>
+    <div class="demo-banner-actions">
+      <button type="button" id="topResetBtn" class="btn btn-secondary btn-sm" style="border-color: #fca5a5; color: #b91c1c; font-weight: 700;">🔄 Reset Form</button>
+      <button type="button" id="fillSampleBtn" class="btn btn-secondary btn-sm">💡 Load Sample Demo Data (View only)</button>
+      <button type="button" id="openDemoDirectBtn" class="btn btn-purple btn-sm">👁️ Preview Output Document</button>
+    </div>
+  </div>
+
+  <!-- ── Header ── -->
+  <header class="form-header">
+    <div class="logo-area">
+      <div class="logo-icon">🖥️</div>
+      <h1>IT Infrastructure Procurement Request</h1>
+    </div>
+    <p class="subtitle">Request IT equipment, software, services, repairs or upgrades</p>
+    <span class="mandatory-note">Fields marked <strong>*</strong> are mandatory</span>
+  </header>
+
+  <!-- ── Progress ── -->
+  <div class="progress-bar-container">
+    <div class="progress-bar-fill"></div>
+  </div>
+
+  <form id="procurementForm" action="javascript:void(0);" onsubmit="return false;" novalidate>
+
+    <!-- SECTION 1 -->
+    <section class="form-section">
+      <div class="section-header">
+        <span class="section-number">1</span>
+        <div>
+          <h2>Requester Information</h2>
+          <span class="section-desc">Your details and department</span>
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="ticketNumber">IT ticket number <span class="req">*</span></label>
+          <input type="text" id="ticketNumber" name="ticketNumber" placeholder="e.g. INC-00012345" required>
+        </div>
+
+        <div class="field-group">
+          <label for="dateOfRequest">Date of request <span class="req">*</span></label>
+          <input type="date" id="dateOfRequest" name="dateOfRequest" required>
+        </div>
+
+        <div class="field-group">
+          <label for="requesterName">Requester's name <span class="req">*</span></label>
+          <input type="text" id="requesterName" name="requesterName" placeholder="Full name" required>
+        </div>
+
+        <div class="field-group">
+          <label for="officialEmail">Official email address <span class="req">*</span></label>
+          <input type="email" id="officialEmail" name="officialEmail" placeholder="name@company.com" required>
+        </div>
+
+        <div class="field-group">
+          <label for="department">Department / team <span class="req">*</span></label>
+          <select id="department" name="department" required>
+            <option value="">— Select department —</option>
+            <option>Media</option>
+            <option>IT</option>
+            <option>Data Science</option>
+            <option>Accounts / Finance</option>
+            <option>Translation</option>
+            <option>HR</option>
+            <option>Admin</option>
+            <option>Training Academy</option>
+            <option>Executive Office</option>
+            <option>Other department</option>
+          </select>
+        </div>
+
+        <div class="field-group conditional" id="otherDeptGroup">
+          <label for="otherDeptName">Other department name <span class="req">*</span></label>
+          <input type="text" id="otherDeptName" name="otherDeptName" placeholder="Enter department name">
+        </div>
+
+        <div class="field-group">
+          <label for="projectUnit">Project / unit</label>
+          <input type="text" id="projectUnit" name="projectUnit" placeholder="Optional">
+        </div>
+
+        <div class="field-group">
+          <label for="deliveryAddress">Location / delivery address <span class="req">*</span></label>
+          <input type="text" id="deliveryAddress" name="deliveryAddress" placeholder="Building, floor, desk" required>
+        </div>
+
+        <div class="field-group">
+          <label for="hodManager">HOD / reporting manager <span class="req">*</span></label>
+          <input type="text" id="hodManager" name="hodManager" placeholder="Manager's full name" required>
+        </div>
+
+        <div class="field-group">
+          <label for="contactNumber">Contact number</label>
+          <input type="tel" id="contactNumber" name="contactNumber" placeholder="Optional">
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="form-section">
+      <div class="section-header">
+        <span class="section-number">2</span>
+        <div>
+          <h2>Procurement Request</h2>
+          <span class="section-desc">Details of what you need</span>
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="requestType">Request type <span class="req">*</span></label>
+          <select id="requestType" name="requestType" required>
+            <option value="">— Select type —</option>
+            <option>New purchase</option>
+            <option>Replacement</option>
+            <option>Upgrade</option>
+            <option>Repair / spare part</option>
+            <option>Software licence or subscription</option>
+            <option>Licence / subscription renewal</option>
+            <option>Service or maintenance</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="itemCategory">Item category <span class="req">*</span></label>
+          <select id="itemCategory" name="itemCategory" required>
+            <option value="">— Select category —</option>
+            <option>Laptop / desktop</option>
+            <option>Monitor / display / projector</option>
+            <option>Keyboard / mouse / headset / accessories</option>
+            <option>Printer / scanner / consumables</option>
+            <option>Storage / backup device</option>
+            <option>Network / internet equipment</option>
+            <option>Software / licence / subscription</option>
+            <option>Server / infrastructure equipment</option>
+            <option>IT security equipment / service</option>
+            <option>Repair / replacement part</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field-group full-width">
+          <label for="itemRequested">Item or service requested <span class="req">*</span></label>
+          <input type="text" id="itemRequested" name="itemRequested" placeholder="Describe the item or service" required>
+        </div>
+
+        <div class="field-group">
+          <label for="quantity">Quantity <span class="req">*</span></label>
+          <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+        </div>
+
+        <div class="field-group">
+          <label for="intendedUsers">Name(s) of intended user(s) / team <span class="req">*</span></label>
+          <input type="text" id="intendedUsers" name="intendedUsers" placeholder="User or team name" required>
+        </div>
+
+        <div class="field-group full-width">
+          <label for="purpose">Purpose / work to be performed <span class="req">*</span></label>
+          <textarea id="purpose" name="purpose" rows="3" placeholder="Describe how this will be used" required></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="dateRequired">Date required <span class="req">*</span></label>
+          <input type="date" id="dateRequired" name="dateRequired" required>
+        </div>
+
+        <div class="field-group">
+          <label for="preferredBrand">Preferred brand or model, if any</label>
+          <input type="text" id="preferredBrand" name="preferredBrand" placeholder="Optional">
+        </div>
+
+        <div class="field-group full-width">
+          <label for="additionalRequirements">Additional requirements</label>
+          <textarea id="additionalRequirements" name="additionalRequirements" rows="2" placeholder="Any other specifications or notes"></textarea>
+        </div>
+      </div>
+
+      <div id="itemsContainer"></div>
+      <div style="margin-top: 1rem;">
+        <button type="button" id="addItemBtn" class="btn btn-secondary btn-sm">➕ Add another item</button>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="form-section" id="laptopSection">
+      <div class="section-header">
+        <span class="section-number">3</span>
+        <div>
+          <h2>Department-based Laptop Configuration</h2>
+          <span class="section-desc">Standard specification for your department</span>
+        </div>
+      </div>
+
+      <div id="specDisplay"></div>
+
+      <h3 style="font-size: 0.95rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--gray-800);">🎒 Standard Laptop Kit</h3>
+      <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 0.5rem;">The following are included with every laptop:</p>
+      <table class="accessories-table">
+        <thead>
+          <tr><th>Included Accessories</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="check-icon">✔</span> Carrying bag</td></tr>
+          <tr><td><span class="check-icon">✔</span> Mouse</td></tr>
+          <tr><td><span class="check-icon">✔</span> Headphones</td></tr>
+        </tbody>
+      </table>
+
+      <div class="field-grid" style="margin-top: 1.25rem;">
+        <div class="field-group">
+          <label for="additionalAccessories">Are any additional accessories required? <span class="req">*</span></label>
+          <select id="additionalAccessories" name="additionalAccessories">
+            <option value="">— Select —</option>
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="conditional" id="additionalAccessoriesFields">
+        <div class="field-grid" style="margin-top: 1rem;">
+          <div class="field-group full-width">
+            <label>Additional accessory and quantity <span class="req">*</span></label>
+            <input type="text" name="accessoryDetail" id="accessoryDetail" placeholder="e.g. Webcam × 1, Docking station × 1">
+          </div>
+          <div class="field-group full-width">
+            <label>Business justification <span class="req">*</span></label>
+            <textarea name="accessoryJustification" id="accessoryJustification" rows="2" placeholder="Why are these accessories needed?"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+      <h3 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--gray-800);">⚙️ Configuration Confirmation</h3>
+
+      <div class="field-grid">
+        <div class="field-group full-width">
+          <label for="configConfirmation">Does the displayed standard configuration meet your requirement? <span class="req">*</span></label>
+          <select id="configConfirmation" name="configConfirmation">
+            <option value="">— Select —</option>
+            <option>Yes — proceed with the standard configuration</option>
+            <option>No — request a different configuration</option>
+            <option>Unsure / no standard is listed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="conditional" id="configYesMsg">
+        <div class="info-box green">
+          ✅ <strong>Standard configuration confirmed.</strong> Your request will be processed with the standard specification listed above.
+        </div>
+      </div>
+
+      <div class="conditional" id="configNoFields">
+        <div class="info-box red" style="margin-bottom: 1rem;">
+          ⚠️ <strong>Non-standard configuration requested.</strong> Please obtain approval from your HOD and the CEO, and attach both approvals before submitting the form.
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group full-width">
+            <label>Requested configuration <span class="req">*</span></label>
+            <textarea name="requestedConfig" id="requestedConfig" rows="3" placeholder="Describe the configuration you need"></textarea>
+          </div>
+          <div class="field-group full-width">
+            <label>Difference from the standard configuration <span class="req">*</span></label>
+            <textarea name="configDifference" id="configDifference" rows="3" placeholder="What differs and why"></textarea>
+          </div>
+          <div class="field-group full-width">
+            <label>Business justification <span class="req">*</span></label>
+            <textarea name="configJustification" id="configJustification" rows="3" placeholder="Why the standard configuration does not meet the need"></textarea>
+          </div>
+          <div class="field-group full-width">
+            <label>Applications / workload requiring the change</label>
+            <textarea name="configWorkload" id="configWorkload" rows="2" placeholder="Optional — list applications or workloads"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label>HOD approval <span class="req">*</span></label>
+            <div class="file-upload-area">
+              <input type="file" name="hodApproval" id="hodApproval" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+              <div class="upload-icon">📤</div>
+              <div class="upload-text"><strong>Click to upload</strong> or drag & drop<br>PDF, DOC, JPG</div>
+            </div>
+            <div class="file-list" id="hodApprovalList"></div>
+          </div>
+
+          <div class="field-group">
+            <label>CEO approval <span class="req">*</span></label>
+            <div class="file-upload-area">
+              <input type="file" name="ceoApproval" id="ceoApproval" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+              <div class="upload-icon">📤</div>
+              <div class="upload-text"><strong>Click to upload</strong> or drag & drop<br>PDF, DOC, JPG</div>
+            </div>
+            <div class="file-list" id="ceoApprovalList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conditional" id="configUnsureMsg">
+        <div class="info-box blue">
+          ℹ️ <strong>IT Infrastructure will review</strong> the requirement and advise on the suitable configuration and applicable approvals.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 (Conditional) -->
+    <section class="form-section conditional" id="existingEquipSection">
+      <div class="section-header">
+        <span class="section-number">4</span>
+        <div>
+          <h2>Existing Equipment Details</h2>
+          <span class="section-desc">For replacement, upgrade, repair or renewal requests</span>
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="existingItem">Existing item / model</label>
+          <input type="text" id="existingItem" name="existingItem" placeholder="e.g. Dell Latitude 5520">
+        </div>
+        <div class="field-group">
+          <label for="assetId">Asset ID / serial number</label>
+          <input type="text" id="assetId" name="assetId" placeholder="e.g. AST-00456">
+        </div>
+        <div class="field-group">
+          <label for="currentUser">Current user</label>
+          <input type="text" id="currentUser" name="currentUser" placeholder="Person currently using the item">
+        </div>
+        <div class="field-group">
+          <label for="purchaseDate">Purchase date, if known</label>
+          <input type="date" id="purchaseDate" name="purchaseDate">
+        </div>
+        <div class="field-group">
+          <label for="warrantyExpiry">Warranty expiry, if known</label>
+          <input type="date" id="warrantyExpiry" name="warrantyExpiry">
+        </div>
+        <div class="field-group">
+          <label for="relatedTicket">Related support ticket number, if different</label>
+          <input type="text" id="relatedTicket" name="relatedTicket" placeholder="Optional">
+        </div>
+        <div class="field-group full-width">
+          <label for="issueReason">Issue faced / reason for request <span class="req">*</span></label>
+          <textarea id="issueReason" name="issueReason" rows="3" placeholder="Describe the issue or reason in detail"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="form-section">
+      <div class="section-header">
+        <span class="section-number">5</span>
+        <div>
+          <h2>Requester Declaration</h2>
+          <span class="section-desc">Confirm and submit</span>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="declaration1" name="declaration1" required>
+        <label for="declaration1">I confirm that the information provided is accurate to the best of my knowledge.</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="declaration2" name="declaration2" required>
+        <label for="declaration2">I have entered the IT ticket number and verified all requirement details.</label>
+      </div>
+
+      <div class="field-grid" style="margin-top: 1.25rem;">
+        <div class="field-group">
+          <label for="declarationName">Requester's name <span class="req">*</span></label>
+          <input type="text" id="declarationName" name="declarationName" required>
+        </div>
+        <div class="field-group">
+          <label for="declarationDate">Date <span class="req">*</span></label>
+          <input type="date" id="declarationDate" name="declarationDate" required>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Submit bar ── -->
+    <div class="submit-bar">
+      <span class="submit-info">Submitting validates the form and opens the Official Document &amp; Email Dispatch Hub.</span>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button type="button" id="resetBtn" class="btn btn-secondary btn-block-mobile">🔄 Reset Form</button>
+        <button type="button" id="printBtn" class="btn btn-secondary btn-block-mobile">🖨️ Direct Print</button>
+        <button type="button" id="submitBtn" class="btn btn-primary btn-block-mobile">📨 Submit Request</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     MODAL: SUBMISSION & DISPATCH HUB (PDF & EMAIL ONLY)
+     ══════════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="demoModal">
+  <div class="modal-box">
+    
+    <div class="modal-header">
+      <div class="modal-header-title">
+        <span style="font-size: 1.6rem;">🎯</span>
+        <div>
+          <h3>Procurement Request Output Hub</h3>
+          <p>Your request has been compiled. You can print the official requisition or dispatch via email:</p>
+        </div>
+      </div>
+      <button type="button" class="modal-close-btn" id="modalCloseBtn">✕</button>
+    </div>
+
+    <!-- Clean 2-Option Tabs -->
+    <div class="modal-tabs">
+      <button type="button" class="modal-tab-btn active" data-tab="tab-pdf">
+        <span>📄</span> 1. Printable Requisition Form (PDF)
+      </button>
+      <button type="button" class="modal-tab-btn" data-tab="tab-email">
+        <span>✉️</span> 2. Automated Email Alert (Send to IT &amp; HOD)
+      </button>
+    </div>
+
+    <!-- Modal Content Panes -->
+    <div class="modal-tab-body">
+      
+      <!-- Sample Notice Banner (shown only when sample data is active) -->
+      <div class="sample-mode-banner" id="sampleNoticeBanner" style="display: none;">
+        <span style="font-size: 1.3rem;">💡</span>
+        <div>
+          <strong>Sample Demo Mode Active:</strong> This preview shows how filled data is formatted. <strong>Printing is disabled for sample data.</strong> To print an official document, please fill in your real procurement details.
+        </div>
+      </div>
+
+      <!-- TAB 1: PDF Export -->
+      <div class="tab-pane active" id="tab-pdf">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h4 style="color: var(--gray-900); font-size: 0.95rem;">Formatted Procurement Requisition Document</h4>
+            <p style="font-size: 0.8rem; color: var(--gray-500);">Prints clean on single/exact pages with all form details and signature boxes.</p>
+          </div>
+          <button type="button" id="downloadDocBtn" class="btn btn-primary btn-sm">🖨️ Print / Save as PDF</button>
+        </div>
+
+        <!-- The actual isolated document -->
+        <div class="printable-document" id="docPreviewArea">
+          <div class="doc-watermark">SAMPLE DEMO</div>
+
+          <div class="doc-header">
+            <div class="doc-header-left">
+              <h2>IT Infrastructure Procurement Requisition</h2>
+              <p>Generated on <span id="docGeneratedDate">-</span> · Official Organization Requisition Copy</p>
+            </div>
+            <div class="doc-ticket-badge">
+              <span class="lbl">IT Ticket Number</span>
+              <span class="val" id="docTicketNum">INC-00012345</span>
+            </div>
+          </div>
+
+          <!-- Section: Requester -->
+          <div class="doc-section-title">1. Requester &amp; Organizational Details</div>
+          <div class="doc-grid">
+            <div class="doc-row"><span class="doc-label">Requester Name:</span><span class="doc-val" id="docReqName">-</span></div>
+            <div class="doc-row"><span class="doc-label">Request Date:</span><span class="doc-val" id="docReqDate">-</span></div>
+            <div class="doc-row"><span class="doc-label">Official Email:</span><span class="doc-val" id="docReqEmail">-</span></div>
+            <div class="doc-row"><span class="doc-label">Department:</span><span class="doc-val" id="docDept">-</span></div>
+            <div class="doc-row"><span class="doc-label">Project / Unit:</span><span class="doc-val" id="docProject">-</span></div>
+            <div class="doc-row"><span class="doc-label">Reporting HOD:</span><span class="doc-val" id="docHod">-</span></div>
+            <div class="doc-row"><span class="doc-label">Contact Number:</span><span class="doc-val" id="docContact">-</span></div>
+            <div class="doc-row"><span class="doc-label">Delivery Location:</span><span class="doc-val" id="docLoc">-</span></div>
+          </div>
+
+          <!-- Section: Item Specifications -->
+          <div class="doc-section-title">2. Procurement Requirements</div>
+          <div class="doc-grid">
+            <div class="doc-row"><span class="doc-label">Request Type:</span><span class="doc-val" id="docReqType">-</span></div>
+            <div class="doc-row"><span class="doc-label">Item Category:</span><span class="doc-val" id="docCategory">-</span></div>
+            <div class="doc-row"><span class="doc-label">Date Required:</span><span class="doc-val" id="docDateReq">-</span></div>
+            <div class="doc-row"><span class="doc-label">Preferred Brand:</span><span class="doc-val" id="docBrand">-</span></div>
+            <div class="doc-row" style="grid-column: 1 / -1;"><span class="doc-label">Intended User(s):</span><span class="doc-val" id="docIntendedUsers">-</span></div>
+          </div>
+
+          <div class="doc-box">
+            <span style="font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 0.25rem;">Primary Requested Item &amp; Purpose:</span>
+            <div id="docItemAndPurpose">-</div>
+          </div>
+
+          <!-- Additional items if entered -->
+          <div class="doc-box" id="docAdditionalItemsBox" style="display: none;"></div>
+
+          <!-- Section: Laptop specs (if applicable) -->
+          <div class="doc-box" id="docLaptopBox" style="display: none;"></div>
+
+          <!-- Section: Existing equipment (if applicable) -->
+          <div class="doc-box" id="docExistingBox" style="display: none;"></div>
+
+          <!-- Digital Signature & Approvals -->
+          <div class="doc-signatures">
+            <div class="doc-sig-box">
+              <span style="font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 0.35rem;">Requester Confirmation &amp; Declaration:</span>
+              <p>Certified that the request is required for official business duties.</p>
+              <p style="margin-top: 0.5rem;">Digitally Signed By: <strong id="docSigRequester">-</strong></p>
+              <p style="color: #64748b;">Date: <span id="docSigDate">-</span></p>
+            </div>
+            <div class="doc-sig-box">
+              <span style="font-weight: 700; color: #1e3a8a; display: block; margin-bottom: 0.35rem;">Approval &amp; Verification Workflow:</span>
+              <p>HOD Review: <strong>Pending Official Review</strong></p>
+              <p>IT Infrastructure Verification: <strong>Initiated</strong></p>
+              <p style="color: #64748b; margin-top: 0.5rem;">Ticket Status: <strong>SUBMITTED</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Automated Email Alert -->
+      <div class="tab-pane" id="tab-email">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h4 style="color: var(--gray-900); font-size: 0.95rem;">Automated Multi-Party Email Notification</h4>
+            <p style="font-size: 0.8rem; color: var(--gray-500);">Pre-formatted email with all details, ready to dispatch directly to IT and HOD.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button type="button" id="copyEmailBtn" class="btn btn-secondary btn-sm">📋 Copy Email Text</button>
+            <a id="emailMailtoLink" href="#" class="btn btn-accent btn-sm">✉️ Send via Outlook / Mail Client</a>
+          </div>
+        </div>
+
+        <div class="email-client">
+          <div class="email-header-fields">
+            <div class="email-field-row">
+              <span class="email-field-lbl">To:</span>
+              <span class="email-field-val" id="emailTo">it-procurement@company.internal</span>
+            </div>
+            <div class="email-field-row">
+              <span class="email-field-lbl">Cc:</span>
+              <span class="email-field-val" id="emailCc">-</span>
+            </div>
+            <div class="email-field-row">
+              <span class="email-field-lbl">Subject:</span>
+              <span class="email-field-val" id="emailSubject" style="font-weight: 700; color: #1e3a8a;">[Procurement Request] INC-00012345</span>
+            </div>
+          </div>
+          <div class="email-body" id="emailBodyContent">
+            <!-- Dynamic structured email content -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <span style="font-size: 0.8rem; color: var(--gray-500);">IT Infrastructure Procurement System</span>
+      <button type="button" class="btn btn-secondary btn-sm" id="modalCloseFooterBtn">Done / Close</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   IT Infrastructure Procurement Request Form — Logic & Hub
+   ═══════════════════════════════════════════════════════════ */
+
+function initProcurementForm() {
+  const form = document.getElementById("procurementForm");
+  const departmentSelect = document.getElementById("department");
+  const otherDeptGroup = document.getElementById("otherDeptGroup");
+  const otherDeptName = document.getElementById("otherDeptName");
+  const requestType = document.getElementById("requestType");
+  const itemCategory = document.getElementById("itemCategory");
+  const laptopSection = document.getElementById("laptopSection");
+  const existingEquipSection = document.getElementById("existingEquipSection");
+  const specDisplay = document.getElementById("specDisplay");
+  const additionalAccessories = document.getElementById("additionalAccessories");
+  const additionalAccessoriesFields = document.getElementById("additionalAccessoriesFields");
+  const configConfirmation = document.getElementById("configConfirmation");
+  const configNoFields = document.getElementById("configNoFields");
+  const configUnsureMsg = document.getElementById("configUnsureMsg");
+  const configYesMsg = document.getElementById("configYesMsg");
+  const itemsContainer = document.getElementById("itemsContainer");
+  const addItemBtn = document.getElementById("addItemBtn");
+  const progressFill = document.querySelector(".progress-bar-fill");
+
+  // Hub Modal elements
+  const demoModal = document.getElementById("demoModal");
+  const fillSampleBtn = document.getElementById("fillSampleBtn");
+  const openDemoDirectBtn = document.getElementById("openDemoDirectBtn");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+  const modalCloseFooterBtn = document.getElementById("modalCloseFooterBtn");
+  const tabButtons = document.querySelectorAll(".modal-tab-btn");
+  const tabPanes = document.querySelectorAll(".tab-pane");
+  const downloadDocBtn = document.getElementById("downloadDocBtn");
+  const copyEmailBtn = document.getElementById("copyEmailBtn");
+  const printContainer = document.getElementById("printContainer");
+  const sampleNoticeBanner = document.getElementById("sampleNoticeBanner");
+  const docPreviewArea = document.getElementById("docPreviewArea");
+
+  // Reset buttons (top and bottom)
+  const topResetBtn = document.getElementById("topResetBtn");
+  const resetBtn = document.getElementById("resetBtn");
+
+  let itemCount = 1;
+  let isSampleData = false;
+
+  const laptopSpecs = {
+    high: {
+      title: "Media / IT / Data Science — High Performance Configuration",
+      specs: [
+        { label: "Processor", value: "Intel 12th or 13th Gen H-series (i5-12xxxH or i7), or AMD Ryzen equivalent" },
+        { label: "Graphics", value: "NVIDIA RTX 3050 with 4–6 GB VRAM, or RTX 4050 if possible" },
+        { label: "RAM", value: "16 GB DDR4 or DDR5, dual channel" },
+        { label: "Storage", value: "Minimum 512 GB NVMe SSD" },
+      ],
+    },
+    accounts: {
+      title: "Accounts / Finance / Training Academy — Standard Business Configuration",
+      specs: [
+        { label: "Processor", value: "Intel Core i5, 13th or 14th Gen" },
+        { label: "RAM", value: "16 GB" },
+        { label: "Storage", value: "512 GB NVMe SSD" },
+      ],
+    },
+    basic: {
+      title: "Translation / HR / Admin — Standard Configuration",
+      specs: [
+        { label: "Processor", value: "Intel Core i5, 13th Gen or newer, U-series or H-series" },
+        { label: "RAM", value: "8 GB" },
+        { label: "Storage", value: "512 GB NVMe SSD" },
+      ],
+    },
+    other: {
+      title: "Other Department",
+      specs: [],
+    },
+  };
+
+  function deptToSpecKey(dept) {
+    if (["Media", "IT", "Data Science"].includes(dept)) return "high";
+    if (["Accounts", "Finance", "Accounts / Finance", "Training Academy"].includes(dept)) return "accounts";
+    if (["Translation", "HR", "Admin"].includes(dept)) return "basic";
+    return "other";
+  }
+
+  function getLaptopSpecText(dept) {
+    const key = deptToSpecKey(dept);
+    const data = laptopSpecs[key];
+    if (key === "other" || !data.specs.length) return "No standard configuration listed (IT Infrastructure will review requirement)";
+    return data.specs.map(s => `${s.label}: ${s.value}`).join(" | ");
+  }
+
+  function renderSpec(key) {
+    if (!key) {
+      specDisplay.innerHTML = `
+        <div class="info-box blue" style="margin-bottom: 1rem;">
+          👉 <strong>Please select your Department in Section 1</strong> to automatically load and highlight your department's standard laptop specification.
+        </div>
+        <div style="background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 1.25rem; font-size: 0.88rem;">
+          <strong style="color: #1e3a8a; font-size: 0.95rem; display: block; margin-bottom: 0.75rem;">📋 Standard Department Configurations Matrix:</strong>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+            <div style="padding: 0.6rem; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <strong style="color: #0f172a;">• Media / IT / Data Science (High Performance):</strong><br>
+              <span style="color: #475569;">Processor: Intel 12th/13th Gen H-series (or Ryzen) | GPU: NVIDIA RTX 3050 (4–6GB) or RTX 4050 | RAM: 16 GB DDR4/DDR5 | Storage: Minimum 512 GB NVMe SSD</span>
+            </div>
+            <div style="padding: 0.6rem; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <strong style="color: #0f172a;">• Accounts / Finance / Training Academy (Standard Business):</strong><br>
+              <span style="color: #475569;">Processor: Intel Core i5, 13th or 14th Gen | RAM: 16 GB | Storage: 512 GB NVMe SSD</span>
+            </div>
+            <div style="padding: 0.6rem; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <strong style="color: #0f172a;">• Translation / HR / Admin (Standard Office):</strong><br>
+              <span style="color: #475569;">Processor: Intel Core i5, 13th Gen or newer (U/H series) | RAM: 8 GB | Storage: 512 GB NVMe SSD</span>
+            </div>
+            <div style="padding: 0.6rem; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <strong style="color: #0f172a;">• Executive Office / Other Departments:</strong><br>
+              <span style="color: #475569;">No standard configuration listed. IT Infrastructure will review the requirement directly.</span>
+            </div>
+          </div>
+        </div>`;
+      return;
+    }
+
+    const data = laptopSpecs[key];
+    if (key === "other") {
+      specDisplay.innerHTML = `
+        <div class="info-box yellow">
+          <strong>ℹ️ No standard configuration listed</strong><br>
+          No standard configuration is currently listed for this department. IT Infrastructure will review the requirement and advise on the suitable configuration.
+        </div>`;
+      return;
+    }
+
+    let html = `<div class="spec-card"><h4>💻 ${data.title}</h4>`;
+    data.specs.forEach((s) => {
+      html += `<div class="spec-line"><span class="spec-label">${s.label}:</span><span class="spec-value">${s.value}</span></div>`;
+    });
+    html += `</div>`;
+    specDisplay.innerHTML = html;
+  }
+
+  function updateLaptopVisibility() {
+    // Section 3 is always visible on the form as the core department laptop configuration
+    if (departmentSelect && departmentSelect.value) {
+      renderSpec(deptToSpecKey(departmentSelect.value));
+    } else {
+      renderSpec("");
+    }
+  }
+
+  function updateExistingEquipVisibility() {
+    const rt = requestType.value;
+    const showExisting = ["Replacement", "Upgrade", "Repair / spare part", "Licence / subscription renewal"].includes(rt);
+    toggle(existingEquipSection, showExisting);
+  }
+
+  departmentSelect.addEventListener("change", () => {
+    toggle(otherDeptGroup, departmentSelect.value === "Other department");
+    if (departmentSelect && departmentSelect.value) {
+      renderSpec(deptToSpecKey(departmentSelect.value));
+    } else {
+      renderSpec("");
+    }
+    updateProgress();
+  });
+
+  requestType.addEventListener("change", () => {
+    updateExistingEquipVisibility();
+    updateProgress();
+  });
+
+  itemCategory.addEventListener("change", () => {
+    updateLaptopVisibility();
+    updateProgress();
+  });
+
+  additionalAccessories.addEventListener("change", () => {
+    toggle(additionalAccessoriesFields, additionalAccessories.value === "Yes");
+  });
+
+  configConfirmation.addEventListener("change", () => {
+    const val = configConfirmation.value;
+    toggle(configNoFields, val === "No — request a different configuration");
+    toggle(configUnsureMsg, val === "Unsure / no standard is listed");
+    toggle(configYesMsg, val === "Yes — proceed with the standard configuration");
+  });
+
+  addItemBtn.addEventListener("click", () => {
+    itemCount++;
+    const row = document.createElement("div");
+    row.className = "item-row";
+    row.innerHTML = `
+      <div class="item-row-header">
+        <h4>📦 Additional Item #${itemCount}</h4>
+        <button type="button" class="btn btn-danger btn-sm remove-item-btn">✕ Remove</button>
+      </div>
+      <div class="field-grid">
+        <div class="field-group full-width">
+          <label>Item or service requested <span class="req">*</span></label>
+          <input type="text" class="add-item-name" name="additionalItem_${itemCount}" required>
+        </div>
+        <div class="field-group">
+          <label>Quantity <span class="req">*</span></label>
+          <input type="number" class="add-item-qty" name="additionalQty_${itemCount}" min="1" value="1" required>
+        </div>
+        <div class="field-group">
+          <label>Date required <span class="req">*</span></label>
+          <input type="date" class="add-item-date" name="additionalDate_${itemCount}" required>
+        </div>
+        <div class="field-group full-width">
+          <label>Purpose / work to be performed <span class="req">*</span></label>
+          <textarea class="add-item-purpose" name="additionalPurpose_${itemCount}" rows="2" required></textarea>
+        </div>
+        <div class="field-group">
+          <label>Preferred brand or model</label>
+          <input type="text" class="add-item-brand" name="additionalBrand_${itemCount}">
+        </div>
+      </div>`;
+    itemsContainer.appendChild(row);
+
+    row.querySelector(".remove-item-btn").addEventListener("click", () => {
+      row.remove();
+      renumberItems();
+    });
+  });
+
+  function renumberItems() {
+    const items = itemsContainer.querySelectorAll(".item-row");
+    items.forEach((item, idx) => {
+      const h4 = item.querySelector("h4");
+      if (h4) h4.textContent = `📦 Additional Item #${idx + 2}`;
+    });
+  }
+
+  // File upload display helper
+  document.querySelectorAll(".file-upload-area").forEach((area) => {
+    const input = area.querySelector('input[type="file"]');
+    const listContainer = area.closest(".field-group").querySelector(".file-list") ||
+      area.parentElement.querySelector(".file-list");
+
+    if (!input) return;
+
+    input.addEventListener("change", () => {
+      if (!listContainer) return;
+      Array.from(input.files).forEach((file) => {
+        const fileItem = document.createElement("div");
+        fileItem.className = "file-item";
+        fileItem.innerHTML = `
+          <span>📎 ${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+          <button type="button" class="remove-file" title="Remove">✕</button>`;
+        fileItem.querySelector(".remove-file").addEventListener("click", () => {
+          fileItem.remove();
+        });
+        listContainer.appendChild(fileItem);
+      });
+    });
+  });
+
+  function getUploadedFilenames() {
+    const fileItems = document.querySelectorAll(".file-list .file-item span");
+    if (!fileItems.length) return "None attached";
+    return Array.from(fileItems).map(el => el.textContent.trim()).join(", ");
+  }
+
+  function updateProgress() {
+    const allRequired = form.querySelectorAll("[required]");
+    let filled = 0;
+    allRequired.forEach((el) => {
+      if (el.offsetParent === null) {
+        filled++;
+        return;
+      }
+      if (el.type === "checkbox") {
+        if (el.checked) filled++;
+      } else if (el.value && el.value.trim() !== "") {
+        filled++;
+      }
+    });
+    const pct = allRequired.length ? Math.round((filled / allRequired.length) * 100) : 0;
+    progressFill.style.width = pct + "%";
+  }
+
+  form.addEventListener("input", () => {
+    isSampleData = false;
+    updateProgress();
+  });
+  form.addEventListener("change", () => {
+    isSampleData = false;
+    updateProgress();
+  });
+
+  // ══════════════════════════════════════════════════════════════
+  // TAB SWITCHING IN MODAL
+  // ══════════════════════════════════════════════════════════════
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach(b => b.classList.remove("active"));
+      tabPanes.forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      const target = document.getElementById(btn.getAttribute("data-tab"));
+      if (target) target.classList.add("active");
+    });
+  });
+
+  function closeModal() {
+    demoModal.classList.remove("active");
+  }
+
+  modalCloseBtn.addEventListener("click", closeModal);
+  modalCloseFooterBtn.addEventListener("click", closeModal);
+  demoModal.addEventListener("click", (e) => {
+    if (e.target === demoModal) closeModal();
+  });
+
+  function getVal(id) {
+    const el = document.getElementById(id);
+    return el && el.value ? el.value : "";
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // COMPILE FORM DATA INTO OUTPUTS (PDF & EMAIL)
+  // ══════════════════════════════════════════════════════════════
+  function populateDestinationDemos() {
+    // Section 1
+    const ticket = getVal("ticketNumber") || "INC-00012345";
+    const reqDate = getVal("dateOfRequest") || new Date().toISOString().split("T")[0];
+    const name = getVal("requesterName") || "Requester Name";
+    const email = getVal("officialEmail") || "employee@company.com";
+    const rawDept = getVal("department") || "IT";
+    const otherDeptVal = getVal("otherDeptName");
+    const dept = (rawDept === "Other department" && otherDeptVal) ? "Other (" + otherDeptVal + ")" : rawDept;
+    const projectUnit = getVal("projectUnit") || "N/A";
+    const loc = getVal("deliveryAddress") || "Office Location";
+    const hod = getVal("hodManager") || "Reporting Manager";
+    const contact = getVal("contactNumber") || "N/A";
+
+    // Section 2
+    const reqTypeVal = getVal("requestType") || "New purchase";
+    const catVal = getVal("itemCategory") || "General Equipment";
+    const item = getVal("itemRequested") || "Item Requested";
+    const qty = getVal("quantity") || "1";
+    const intendedUsers = getVal("intendedUsers") || name;
+    const purpose = getVal("purpose") || "Work and operational requirements";
+    const dateReq = getVal("dateRequired") || reqDate;
+    const preferredBrand = getVal("preferredBrand") || "Any standard brand";
+    const additionalReqs = getVal("additionalRequirements") || "None";
+
+    // Additional items
+    const additionalItemRows = document.querySelectorAll("#itemsContainer .item-row");
+    let additionalItemsSummary = [];
+    additionalItemRows.forEach((row, idx) => {
+      const itmNameEl = row.querySelector(".add-item-name");
+      const itmName = itmNameEl ? itmNameEl.value : "";
+      const itmQtyEl = row.querySelector(".add-item-qty");
+      const itmQty = itmQtyEl ? itmQtyEl.value : "1";
+      const itmPurposeEl = row.querySelector(".add-item-purpose");
+      const itmPurpose = itmPurposeEl ? itmPurposeEl.value : "";
+      const itmDateEl = row.querySelector(".add-item-date");
+      const itmDate = itmDateEl ? itmDateEl.value : "";
+      if (itmName) {
+        additionalItemsSummary.push(`Item #${idx + 2}: ${itmName} (Qty: ${itmQty}, Required: ${itmDate}) — Purpose: ${itmPurpose}`);
+      }
+    });
+
+    // Section 3: Laptop
+    const isLaptop = catVal.includes("Laptop");
+    const laptopSpecStr = isLaptop ? getLaptopSpecText(rawDept) : "";
+    const addAccessoriesVal = getVal("additionalAccessories") || "No";
+    const accessoryDetail = getVal("accessoryDetail");
+    const accessoryJustification = getVal("accessoryJustification");
+    const configConf = getVal("configConfirmation") || "Standard configuration applicable";
+    const requestedConfig = getVal("requestedConfig");
+    const configDifference = getVal("configDifference");
+    const configJustification = getVal("configJustification");
+    const configWorkload = getVal("configWorkload");
+
+    // Section 4: Existing Equipment
+    const existingEquipSectionVisible = existingEquipSection.classList.contains("visible");
+    const existingItem = getVal("existingItem");
+    const assetId = getVal("assetId");
+    const currentUser = getVal("currentUser");
+    const purchaseDate = getVal("purchaseDate");
+    const warrantyExpiry = getVal("warrantyExpiry");
+    const relatedTicket = getVal("relatedTicket");
+    const issueReason = getVal("issueReason");
+
+    // Section 5: Declaration
+    const declarationNameVal = getVal("declarationName") || name;
+    const declarationDateVal = getVal("declarationDate") || reqDate;
+
+    // ── Sample mode styling & notice ──
+    if (isSampleData) {
+      docPreviewArea.classList.add("is-sample");
+      sampleNoticeBanner.style.display = "flex";
+      downloadDocBtn.classList.remove("btn-primary");
+      downloadDocBtn.classList.add("btn-secondary");
+      downloadDocBtn.style.opacity = "0.75";
+      downloadDocBtn.title = "Sample demo data cannot be printed.";
+    } else {
+      docPreviewArea.classList.remove("is-sample");
+      sampleNoticeBanner.style.display = "none";
+      downloadDocBtn.classList.remove("btn-secondary");
+      downloadDocBtn.classList.add("btn-primary");
+      downloadDocBtn.style.opacity = "1";
+      downloadDocBtn.title = "Print or save this document as PDF";
+    }
+
+    // ── 1. POPULATE OFFICIAL PRINTABLE REQUISITION ──
+    document.getElementById("docGeneratedDate").textContent = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    document.getElementById("docTicketNum").textContent = ticket;
+    document.getElementById("docReqDate").textContent = reqDate;
+    document.getElementById("docReqName").textContent = name;
+    document.getElementById("docReqEmail").textContent = email;
+    document.getElementById("docDept").textContent = dept;
+    document.getElementById("docProject").textContent = projectUnit;
+    document.getElementById("docHod").textContent = hod;
+    document.getElementById("docContact").textContent = contact;
+    document.getElementById("docLoc").textContent = loc;
+
+    document.getElementById("docReqType").textContent = reqTypeVal;
+    document.getElementById("docCategory").textContent = catVal;
+    document.getElementById("docDateReq").textContent = dateReq;
+    document.getElementById("docBrand").textContent = preferredBrand;
+    document.getElementById("docIntendedUsers").textContent = intendedUsers;
+    document.getElementById("docItemAndPurpose").innerHTML = `
+      <strong>${item}</strong> (Quantity: ${qty})<br>
+      <span style="color: #475569;">Purpose / Work:</span> ${purpose}<br>
+      ${additionalReqs !== "None" ? `<span style="color: #475569;">Additional Specifications:</span> ${additionalReqs}` : ""}
+    `;
+
+    // Additional items in document
+    const docAdditionalItemsBox = document.getElementById("docAdditionalItemsBox");
+    if (additionalItemsSummary.length) {
+      docAdditionalItemsBox.style.display = "block";
+      docAdditionalItemsBox.innerHTML = `<strong>Additional Items Requested:</strong><br>` + additionalItemsSummary.map(itm => `• ${itm}`).join("<br>");
+    } else {
+      docAdditionalItemsBox.style.display = "none";
+    }
+
+    // Laptop in document
+    const docLaptopBox = document.getElementById("docLaptopBox");
+    if (isLaptop) {
+      docLaptopBox.style.display = "block";
+      let laptopContent = `<strong>Department Standard Specification:</strong><br>${laptopSpecStr}<br><br>`;
+      laptopContent += `<strong>Standard Accessories Included:</strong> Carrying bag, Mouse, Headphones<br>`;
+      if (addAccessoriesVal === "Yes") {
+        laptopContent += `<strong>Additional Accessories:</strong> ${accessoryDetail} (Justification: ${accessoryJustification})<br>`;
+      }
+      laptopContent += `<strong>Configuration Confirmation:</strong> ${configConf}<br>`;
+      if (configConf.includes("No")) {
+        laptopContent += `
+          <div style="margin-top: 0.35rem; padding: 0.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 4px;">
+            <strong>Requested Non-Standard Config:</strong> ${requestedConfig}<br>
+            <strong>Difference from Standard:</strong> ${configDifference}<br>
+            <strong>Business Justification:</strong> ${configJustification}<br>
+            ${configWorkload ? `<strong>Workload / Applications:</strong> ${configWorkload}<br>` : ""}
+            <strong>Approvals Status:</strong> HOD & CEO approvals required and attached for non-standard configuration.
+          </div>`;
+      }
+      docLaptopBox.innerHTML = laptopContent;
+    } else {
+      docLaptopBox.style.display = "none";
+    }
+
+    // Existing Equipment in document
+    const docExistingBox = document.getElementById("docExistingBox");
+    if (existingEquipSectionVisible && (existingItem || assetId || issueReason)) {
+      docExistingBox.style.display = "block";
+      docExistingBox.innerHTML = `
+        <strong>Existing Equipment Details:</strong><br>
+        Item / Model: ${existingItem || 'N/A'} | Asset ID: ${assetId || 'N/A'} | Current User: ${currentUser || 'N/A'}<br>
+        Purchase Date: ${purchaseDate || 'N/A'} | Warranty Expiry: ${warrantyExpiry || 'N/A'} | Support Ticket: ${relatedTicket || 'N/A'}<br>
+        <strong>Issue Faced / Reason:</strong> ${issueReason || 'N/A'}
+      `;
+    } else {
+      docExistingBox.style.display = "none";
+    }
+
+    document.getElementById("docSigRequester").textContent = declarationNameVal;
+    document.getElementById("docSigDate").textContent = declarationDateVal;
+
+    // ── 2. POPULATE AUTOMATED EMAIL NOTIFICATION ──
+    const itProcurementEmail = "it-procurement@company.internal";
+    const ccEmails = `${email}, ${hod.toLowerCase().replace(/[^a-z0-9]/g, '.')}@company.internal`;
+    const emailSubj = `[Procurement Request] ${ticket} - ${catVal} (${dept})`;
+
+    document.getElementById("emailTo").textContent = itProcurementEmail;
+    document.getElementById("emailCc").textContent = ccEmails;
+    document.getElementById("emailSubject").textContent = emailSubj;
+
+    let emailBodyText = `Dear IT Procurement Team,\n\n`;
+    emailBodyText += `A new IT Infrastructure Procurement Request has been submitted with the following details:\n\n`;
+    emailBodyText += `1. REQUESTER INFORMATION\n`;
+    emailBodyText += `--------------------------------------------------\n`;
+    emailBodyText += `IT Ticket Number: ${ticket}\n`;
+    emailBodyText += `Date of Request : ${reqDate}\n`;
+    emailBodyText += `Requester Name  : ${name}\n`;
+    emailBodyText += `Official Email  : ${email}\n`;
+    emailBodyText += `Department      : ${dept}\n`;
+    emailBodyText += `Reporting HOD   : ${hod}\n`;
+    emailBodyText += `Delivery Address: ${loc}\n`;
+    if (contact !== "N/A") emailBodyText += `Contact Number  : ${contact}\n`;
+    emailBodyText += `\n`;
+
+    emailBodyText += `2. PROCUREMENT SPECIFICATIONS\n`;
+    emailBodyText += `--------------------------------------------------\n`;
+    emailBodyText += `Request Type    : ${reqTypeVal}\n`;
+    emailBodyText += `Item Category   : ${catVal}\n`;
+    emailBodyText += `Item Requested  : ${item}\n`;
+    emailBodyText += `Quantity        : ${qty}\n`;
+    emailBodyText += `Intended User(s): ${intendedUsers}\n`;
+    emailBodyText += `Date Required   : ${dateReq}\n`;
+    emailBodyText += `Preferred Brand : ${preferredBrand}\n`;
+    emailBodyText += `Work Purpose    :\n${purpose}\n`;
+
+    if (additionalItemsSummary.length) {
+      emailBodyText += `\nAdditional Items:\n` + additionalItemsSummary.map(i => `  - ${i}`).join('\n') + `\n`;
+    }
+
+    if (isLaptop) {
+      emailBodyText += `\n3. LAPTOP CONFIGURATION\n`;
+      emailBodyText += `--------------------------------------------------\n`;
+      emailBodyText += `Standard Spec: ${laptopSpecStr}\n`;
+      emailBodyText += `Included Kit : Carrying bag, Mouse, Headphones\n`;
+      if (addAccessoriesVal === "Yes") {
+        emailBodyText += `Additional Accessories: ${accessoryDetail} (Justification: ${accessoryJustification})\n`;
+      }
+      emailBodyText += `Confirmation: ${configConf}\n`;
+      if (configConf.includes("No")) {
+        emailBodyText += `Requested Non-standard Config:\n${requestedConfig}\n`;
+        emailBodyText += `Difference: ${configDifference}\n`;
+        emailBodyText += `Justification: ${configJustification}\n`;
+        emailBodyText += `Approvals Status: HOD & CEO approvals required and attached.\n`;
+      }
+    }
+
+    if (existingEquipSectionVisible && (existingItem || assetId || issueReason)) {
+      emailBodyText += `\n4. EXISTING EQUIPMENT DETAILS\n`;
+      emailBodyText += `--------------------------------------------------\n`;
+      emailBodyText += `Model / Asset ID: ${existingItem} / ${assetId}\n`;
+      emailBodyText += `Current User    : ${currentUser}\n`;
+      emailBodyText += `Issue Reason    : ${issueReason}\n`;
+    }
+
+    emailBodyText += `\nDeclaration: Confirmed accurate by ${declarationNameVal} on ${declarationDateVal}.\n\n`;
+    emailBodyText += `Regards,\n${name}\n${dept}`;
+
+    document.getElementById("emailBodyContent").innerHTML = `
+      <div style="font-family: inherit; font-size: 0.88rem; color: #1e293b; white-space: pre-wrap; line-height: 1.6;">${escapeHtml(emailBodyText)}</div>
+    `;
+
+    const mailtoLink = `mailto:${encodeURIComponent(itProcurementEmail)}?cc=${encodeURIComponent(ccEmails)}&subject=${encodeURIComponent(emailSubj)}&body=${encodeURIComponent(emailBodyText)}`;
+    document.getElementById("emailMailtoLink").href = mailtoLink;
+
+    copyEmailBtn.onclick = () => {
+      copyTextToClipboard(emailBodyText);
+    };
+  }
+
+  function copyTextToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("📋 Formatted email body copied to clipboard!", "success");
+      }).catch(() => {
+        fallbackExecCopy(text);
+      });
+    } else {
+      fallbackExecCopy(text);
+    }
+  }
+
+  function fallbackExecCopy(text) {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.top = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const successful = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (successful) {
+        showToast("📋 Formatted email body copied to clipboard!", "success");
+      } else {
+        showToast("📋 Please select the email text below and press Ctrl+C to copy.", "warning");
+      }
+    } catch (err) {
+      showToast("📋 Please select the email text below and press Ctrl+C to copy.", "warning");
+    }
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // AUTO-FILL SAMPLE DATA (GUIDANCE ONLY - CANNOT PRINT)
+  // ══════════════════════════════════════════════════════════════
+  fillSampleBtn.addEventListener("click", () => {
+    isSampleData = true;
+
+    document.getElementById("ticketNumber").value = "INC-DEMO-9999";
+    document.getElementById("dateOfRequest").value = new Date().toISOString().split("T")[0];
+    document.getElementById("requesterName").value = "Sample Employee (Demo)";
+    document.getElementById("officialEmail").value = "sample.demo@company.com";
+    document.getElementById("department").value = "Data Science";
+    departmentSelect.dispatchEvent(new Event("change"));
+    document.getElementById("deliveryAddress").value = "Building 4, 2nd Floor, Workstation 24";
+    document.getElementById("hodManager").value = "Manager Name (Demo)";
+    document.getElementById("contactNumber").value = "+91 98000 00000";
+
+    document.getElementById("requestType").value = "New purchase";
+    document.getElementById("itemCategory").value = "Laptop / desktop";
+    itemCategory.dispatchEvent(new Event("change"));
+    document.getElementById("itemRequested").value = "High-Performance Engineering Laptop";
+    document.getElementById("quantity").value = "1";
+    document.getElementById("intendedUsers").value = "Sample Engineering Team";
+    document.getElementById("purpose").value = "Data analytics, machine learning model compilation, and software simulation tasks.";
+    
+    const futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + 7);
+    document.getElementById("dateRequired").value = futureDate.toISOString().split("T")[0];
+    document.getElementById("preferredBrand").value = "Dell / Lenovo Enterprise";
+
+    document.getElementById("additionalAccessories").value = "No";
+    document.getElementById("configConfirmation").value = "Yes — proceed with the standard configuration";
+    configConfirmation.dispatchEvent(new Event("change"));
+
+    document.getElementById("declaration1").checked = true;
+    document.getElementById("declaration2").checked = true;
+    document.getElementById("declarationName").value = "Sample Employee (Demo)";
+    document.getElementById("declarationDate").value = new Date().toISOString().split("T")[0];
+
+    updateProgress();
+    showToast("ℹ️ Sample demo data loaded. Note: Printing is disabled for sample data.", "warning");
+  });
+
+  // Direct open demo button
+  openDemoDirectBtn.addEventListener("click", () => {
+    populateDestinationDemos();
+    demoModal.classList.add("active");
+  });
+
+  // ══════════════════════════════════════════════════════════════
+  // PRINT / SAVE AS PDF: ISOLATED SINGLE-PAGE PRINT (NO MULTIPLE PAGES)
+  // ══════════════════════════════════════════════════════════════
+  downloadDocBtn.addEventListener("click", () => {
+    if (isSampleData) {
+      showToast("⚠️ Sample data is for view only and cannot be printed.", "warning");
+      return;
+    }
+
+    try {
+      printContainer.innerHTML = "";
+      const clone = docPreviewArea.cloneNode(true);
+      printContainer.appendChild(clone);
+      window.print();
+    } catch (err) {
+      showToast("Printing is restricted in this preview. Please download and open in your browser to print.", "warning");
+    }
+  });
+
+  // ══════════════════════════════════════════════════════════════
+  // SUBMISSION EVENT: VALIDATE & OPEN DISPATCH HUB
+  // ══════════════════════════════════════════════════════════════
+  const submitBtn = document.getElementById("submitBtn");
+
+  function handleFormSubmission(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    form.querySelectorAll(".invalid").forEach((el) => el.classList.remove("invalid"));
+
+    let firstInvalid = null;
+    const visibleRequired = form.querySelectorAll("[required]");
+
+    visibleRequired.forEach((el) => {
+      if (el.offsetParent === null) return;
+      let valid = true;
+      if (el.type === "checkbox") {
+        valid = el.checked;
+      } else if (el.type === "email") {
+        valid = el.value.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+      } else {
+        valid = el.value.trim() !== "";
+      }
+
+      if (!valid) {
+        el.classList.add("invalid");
+        if (!firstInvalid) firstInvalid = el;
+      }
+    });
+
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstInvalid.focus();
+      showToast("Please fill in all mandatory fields marked with *.", "error");
+      return false;
+    }
+
+    populateDestinationDemos();
+    demoModal.classList.add("active");
+    showToast("✅ Procurement details ready for PDF & Email alert!", "success");
+    return false;
+  }
+
+  if (submitBtn) {
+    submitBtn.addEventListener("click", handleFormSubmission);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    handleFormSubmission(e);
+    return false;
+  });
+
+  function showToast(message, type = "success") {
+    let container = document.querySelector(".toast-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.className = "toast-container";
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement("div");
+    let icon = "✅";
+    if (type === "error") icon = "⚠️";
+    if (type === "warning") icon = "ℹ️";
+
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <span class="toast-icon">${icon}</span>
+      <span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(100%)";
+      toast.style.transition = "all 0.3s ease";
+      setTimeout(() => toast.remove(), 300);
+    }, 4500);
+  }
+
+  function toggle(el, show) {
+    if (show) {
+      el.classList.add("visible");
+    } else {
+      el.classList.remove("visible");
+    }
+  }
+
+  const printBtn = document.getElementById("printBtn");
+  if (printBtn) {
+    printBtn.addEventListener("click", () => {
+      populateDestinationDemos();
+      if (isSampleData) {
+        showToast("⚠️ Sample data cannot be printed. Please enter actual details.", "warning");
+        return;
+      }
+      try {
+        printContainer.innerHTML = "";
+        const clone = docPreviewArea.cloneNode(true);
+        printContainer.appendChild(clone);
+        window.print();
+      } catch (err) {
+        showToast("Printing is restricted in this preview. Please download and open in your browser to print.", "warning");
+      }
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // RESET HANDLER (TIED TO BOTH TOP AND BOTTOM RESET BUTTONS)
+  // ══════════════════════════════════════════════════════════════
+  function performFormReset() {
+    form.reset();
+    isSampleData = false;
+    [otherDeptGroup, existingEquipSection, additionalAccessoriesFields, configNoFields, configUnsureMsg, configYesMsg].forEach(
+      (el) => el.classList.remove("visible")
+    );
+    renderSpec("");
+    itemsContainer.innerHTML = "";
+    itemCount = 1;
+    progressFill.style.width = "0%";
+    form.querySelectorAll(".invalid").forEach((el) => el.classList.remove("invalid"));
+
+    // Clear any uploaded file previews
+    document.querySelectorAll(".file-list").forEach(list => list.innerHTML = "");
+
+    // Reset dates to today
+    const today = new Date().toISOString().split("T")[0];
+    const dateOfRequest = document.getElementById("dateOfRequest");
+    if (dateOfRequest) dateOfRequest.value = today;
+    const declarationDate = document.getElementById("declarationDate");
+    if (declarationDate) declarationDate.value = today;
+
+    showToast("Form has been reset.", "success");
+  }
+
+  if (topResetBtn) {
+    topResetBtn.addEventListener("click", performFormReset);
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", performFormReset);
+  }
+
+  const dateOfRequest = document.getElementById("dateOfRequest");
+  if (dateOfRequest && !dateOfRequest.value) {
+    dateOfRequest.value = new Date().toISOString().split("T")[0];
+  }
+
+  const declarationDate = document.getElementById("declarationDate");
+  if (declarationDate && !declarationDate.value) {
+    declarationDate.value = new Date().toISOString().split("T")[0];
+  }
+
+  if (departmentSelect && departmentSelect.value) {
+    renderSpec(deptToSpecKey(departmentSelect.value));
+  } else {
+    renderSpec("");
+  }
+  updateProgress();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initProcurementForm);
+} else {
+  initProcurementForm();
+}
+
+</script>
+</body>
+</html>
